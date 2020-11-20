@@ -1,0 +1,6 @@
+#!/usr/bin/fish 
+
+for folder in $argv
+    set num (string match -r '№(\d+)/$' $folder)[2]
+    tar --transform="flags=r;s|document|КМ-82 Бубела Лаб $num.pdf|" --transform="flags=r;s|latex||" --transform="flags=r;s|source||" -zcvf КМ-82\ Бубела\ Lab$num.tar.gz (echo $folder)latex/document.pdf (echo $folder)source/*
+end
