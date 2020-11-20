@@ -80,6 +80,10 @@
 
 \chapter{Постановка задачі}
 \label{chap:condition}
+В обох завданнях уся робота здійснюється в Selenium IDE.
+Вся лабораторна робилася в браузері \invcommas{Mozilla Firefox 83.0},
+туди ж і встановлювалося розширення селеніум.
+
 \textbf{Завдання 1}\\
 
 
@@ -118,198 +122,83 @@
 	
 % створюємо перелік посилань
 \begin{thebibliography}
-	\bibitem{seleniumdocs} Selenium IDE Documentation [Електронний ресурс]. – 2019. – Режим доступу до ресурсу: https://www.selenium.dev/selenium-ide/docs/en/introduction/getting-started.
-	\bibitem{xpathdocs} MDN contributors. XSLT/XPath Reference [Електронний ресурс] / MDN contributors. – 2020. – Режим доступу до ресурсу: https://developer.mozilla.org/en-US/docs/Web/XPath.
+	\bibitem{seleniumdocs} Selenium IDE Introduction [Електронний ресурс]. – 2019. – Режим доступу до ресурсу: \url{https://www.selenium.dev/selenium-ide/docs/en/introduction/getting-started}.
+	\bibitem{seleniumref} \label{} Selenium IDE API Reference [Електронний ресурс]. – 2019. – Режим доступу до ресурсу: \url{https://www.selenium.dev/selenium-ide/docs/en/api/commands}.
+	\bibitem{xpathdocs} MDN contributors. XSLT/XPath Reference [Електронний ресурс] / MDN contributors. – 2020. – Режим доступу до ресурсу: \url{https://developer.mozilla.org/en-US/docs/Web/XPath}.
 \end{thebibliography}
-
-% створюємо додаток
-\append{Текст програм, які тестуються}
-\begin{singlespacing}
-\begin{lstlisting}[language=Python, basicstyle=\tiny, breaklines=true, caption=prog\_1.py, label={lst:prog1}]
-def closer(A, B):
-    c = []
-    if A[0]**2 + A[1]**2 < B[0]**2 + B[1]**2:
-        c.append(A)
-    if A[0]**2 + A[1]**2 > B[0]**2 + B[1]**2:
-        c.append(B)
-    return c
-
-
-def fl_input(message):
-    isCorrect = False
-    while not isCorrect:
-        try:
-            fl = float(input(message))
-        except ValueError:
-            print("Невірний формат вводу")
-        else:
-            isCorrect = True
-    return fl
-
-
-if __name__ == '__main__':
-    print("Визначення точки з ")
-    print("Введіть дані точки А (х1, у1)")
-    x1 = fl_input("x1 = ")
-    y1 = fl_input("y1 = ")
-    print("Введіть дані точки B (х2, у2)")
-    x2 = fl_input("x2 = ")
-    y2 = fl_input("y2 = ")
-    c = closer((x1, y1), (x2, y2))
-    if len(c) == 0:
-        print("Точки знаходяться на однаковій відстані")
-    else:
-        print(f"Точка з координатами {c[0]} знадиться ближче до початку координат")
-
-\end{lstlisting}
-\end{singlespacing}
-
-\begin{singlespacing}
-\begin{lstlisting}[language=Python, basicstyle=\tiny, breaklines=true, caption=prog\_2.py]
-def sum_min_max(lst):
-    if not lst:
-        return 0
-    minmax_idx = [min(range(len(lst)), key=lst.__getitem__),
-                  max(range(len(lst)), key=lst.__getitem__)]
-    minmax_idx.sort()
-    return sum(lst[minmax_idx[0]:minmax_idx[1] + 1])
-\end{lstlisting}
-\end{singlespacing}
 
 \append{Текст модулів, що реалізують автоматичне тестування}
 
-\begin{singlespacing}
-\begin{lstlisting}[language=Python, basicstyle=\tiny, breaklines=true, caption=test\_prog\_1.py]
-import prog_1
-import unittest
-
-
-class Prog_1Test(unittest.TestCase):
-
-    def test_simple_equality(self):
-        self.assertEqual(prog_1.closer((2.2, 3.3), (-3.3, -2.2)), [])
-
-    def test_int_compatibility(self):
-        self.assertEqual(prog_1.closer((22, 33), (-31, -24)), [(-31, -24)])
-
-    def test_big_numbers(self):
-        self.assertEqual(prog_1.closer(
-            (1000000000000000000000.2, -90000000000000000000000.4), (1221221, 32312321)),
-            [(1221221, 32312321)])
-
-    def test_negative_test(self):
-        self.assertEqual(prog_1.closer((-9.0, 9.0), (1.1, 1.1)), [(1.1, 1.1)])
-
-    def test_bad_data(self):
-        self.assertRaises(TypeError, prog_1.closer, (-9.0, 9.0), (1.1, 'o'))
-
-
-if __name__ == '__main__':
-    unittest.main()
-\end{lstlisting}
-\end{singlespacing}
-
-
-\begin{singlespacing}
-\begin{lstlisting}[language=Python, basicstyle=\tiny, breaklines=true, caption=test\_prog\_2.py]
-import prog_2
-import unittest
-
-
-class Prog_2Test(unittest.TestCase):
-
-    def test_straight_sum(self):
-        self.assertEqual(
-            prog_2.sum_min_max(
-                [1, -6, 0, 34, 434]
-            ),
-            462
-        )
-
-    def test_empty(self):
-        self.assertEqual(
-            prog_2.sum_min_max(
-                []
-            ),
-            0
-        )
-
-    def test_one(self):
-        self.assertEqual(
-            prog_2.sum_min_max(
-                [41]
-            ),
-            41
-        )
-
-    def test_two(self):
-        self.assertEqual(
-            prog_2.sum_min_max(
-                [1, 2]
-            ),
-            3
-        )
-
-    def test_reverse_sum(self):
-        self.assertEqual(
-            prog_2.sum_min_max(
-                [1, 434, 0, 34, -6]
-            ),
-            462
-        )
-
-    def test_float_compatibility(self):
-        self.assertEqual(
-            prog_2.sum_min_max(
-                [1.32, -6.23, 0, 34, 434.001]
-            ),
-            461.77099999999996
-        )
-
-    def test_negative_test(self):
-        self.assertEqual(
-            prog_2.sum_min_max(
-                [-794, -43, -8989, -11, -89]
-            ),
-            -9000
-        )
-
-    def test_multiple_minmax(self):
-        self.assertIn(
-            prog_2.sum_min_max(
-                [-89, 1, 90, -89, 2, 90]
-            ),
-            [2, 5, 1, 3]
-        )
-
-    def test_nested_lst(self):
-        self.assertRaises(TypeError, prog_2.sum_min_max, [12, [21, 32]])
-
-    def test_bad_type_sum(self):
-        self.assertRaises(TypeError, prog_2.sum_min_max, [1, 'o', 2])
-
-    def test_bad_type_cmp(self):
-        self.assertRaises(TypeError, prog_2.sum_min_max, [1, 2, 'o'])
-
-
-if __name__ == '__main__':
-    unittest.main()
-\end{lstlisting}
-\end{singlespacing}
+\listing{КМ82\_Бубела\_ЛР3.side}{../source/src.side}
 
 \append{Скріншоти результатів виконання автотестів}
-
 \begin{figure}[!htp]
 	\centering
-	\includegraphics[scale=0.5]{PNG/test_prog_1.png}
-	\caption{Тестування програми 1}
-	\label{fig:figure1}
+	\includegraphics[scale=0.45]{PNG/Test1.png}
+	\caption{Скріншот Selenium IDE Test1}
+	\label{fig:Test1}
 \end{figure}
 
 \begin{figure}[!htp]
 	\centering
-	\includegraphics[scale=0.5]{PNG/test_prog_2.png}
-	\caption{Тестування програми 2}
-	\label{fig:figure2}
+	\includegraphics[scale=0.5]{PNG/Test2.png}
+	\caption{Скріншот Selenium IDE Test2}
+	\label{fig:Test2}
 \end{figure}
+
+\append{Відповіді на контрольні запитання}
+\begin{enumerate}[label=\arabic*)]
+ \item Що таке Selenium? Яке його призначення? Чому серія програмних продуктів Selenium вивчається в курсі «Автоматизоване тестування програмного забезпечення»?
+
+ Selenium --- це безкоштовна система автоматизованого тестування, що використовується для перевірки веб-додатків у різних браузерах та платформах. Вона дозволяє використовувати кілька мов програмування, такі як Java, C\#, Python тощо для створення тестових скриптів, так званих «Selenium Test Scripts».
+Програмне забезпечення Selenium --- це набір програмного забезпечення, кожна частина відповідає різним потребам в тестуванні.
+ \item Що таке Selenium IDE? Які його основні переваги та особливості застосування?
+ 
+ Інтегроване середовище розробки селену (IDE) - це найпростіший фреймворк у наборі Selenium. Це плагін для Firefox та Chrome, за допомогою якого розробник створює Selenium Test Scripts.
+ 
+ Просте у використанні та установці. Може експортувати тести у формати, що використовуються в Selenium RC та WebDriver. Вбудований модуль довідки та результатів тестування, забезпечує підтримку розширень.
+ 
+ Розроблений лише для Mozilla Firefox та Google Chrome. Створений тільки для прототипування тестів. Для використання умоврих операторів та циклів часто необхідно використовувати результати роботи javascript. Працює повільніше в порівнянні з Selenium RC та WebDriver.
+ \item Які основні команди виконуються в Selenium IDE?
+ 
+ Основні команди, що зокрема використовувались в лабораторній роботі: 
+ open, execute script, click, store text, store attribute, store xpath count, while
+ end, close. Документацію до них можна переглянути на офіційному сайті \cite{seleniumref}.
+ \item Як відбувається процес відлагодження в Selenium IDE? Опишіть його основні етапи і особливості.
+ 
+ Зневаджувач в дозволяє ставити точки зупину в скрипті, починати з обраного місця, ставити виконанння на паузу (та продовжувати), рухатися покроково, регулювати швидкість виконання скрипта.
+ 
+ Для тестування певного кроку --- на нього, ставиться точка зупину. В такому випадку тестування автоматично стане на паузу. Під час паузи слід змінити неробочий елемент, або, якщо це дослідження його роботи --- скористатися можливостями браузера для перегляду його розміщення в коді сторінки і роботи. Після здійснення зневадження окремого кроку можна або продовжити виконання роботи скрипт в звичайному режимі, або перейти до наступного кроку і продовжити зневадження.
+ \item Що таке локатор? Які типи локаторів вам відомі?
+ 
+ Локатор --- використовується для вибору конкретного елементу або алементів як вхідних даних до інших команд у Selenium, він вибирає певну множину елементів з DOM дерева сторінки.
+ В Selenium IDE існують такі типи локаторів:
+ \begin{itemize}
+  \item ID
+  \item Name
+  \item Link
+  \item XPath
+  \item CSS
+ \end{itemize}
+
+ \item Які існують способи одержання значень локаторів?
+ 
+ Команди store [attribute|json|text|title|value|window handle|xpath count] дозволяють записати отримане значення в змінну, назва якої знаходиться в полі Target.
+ \item Яке призначення команд assert та verify в Selenium IDE?
+ 
+ Обидві команди перевіряють чи відповідає змінна очікуваному значенню. В разі негативного результату assert зупиняє роботу скрипта, а verify --- ні.
+ \item Яке призначення команди wait for в Selenium IDE?
+ 
+ Команда wait for буде чекати допоки не виконається умова для вибраного елементу.
+ \item Як можна зберігати і використовувати змінні в Selenium IDE? 
+ 
+ Функції, що зазначені трьома пунктами вище дозволяють зберегти змінні. Для їх використання --- в полі Value записується \$\{ назва\_змінної\}
+ \item Опишіть використання TestCase та TestSuite? 
+ 
+ Test --- послідовність команд, що використовується для автоматичного тестування веб-додатку.
+ 
+ Test Suite --- група тестів. За замовчуванням всі тести додаються в Default Suite. Групи тестів зазвичай використовуються для розділення тестування різних частин веб-додатків.
+\end{enumerate}
+
+
 \end{document}
