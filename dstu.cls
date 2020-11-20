@@ -12,7 +12,7 @@
 % 3. Завантажуємо пакети
 % мовні пакети
 \RequirePackage{cmap}% для кодування шрифтів у pdf
-\RequirePackage[T2A]{fontenc} % пакет для підтримки кирилічних шрифтів
+\RequirePackage[TS1,T2A]{fontenc} % пакет для підтримки кирилічних шрифтів
 \RequirePackage[cp1251]{inputenc} % пакет для підтримкм Windows'івського кодування cp1251
 \RequirePackage[russian,ukrainian]{babel} % пакет для підтримки української та російської мов
 \RequirePackage{pscyr} % пакет із гарними кирилічними шрифтами
@@ -98,6 +98,9 @@
 
 % для створення вступу використаємо команду \uchapter
 \newcommand{\intro}{\uchapter{Вступ}}
+
+% для створення мути роботи використаємо команду \uchapter
+\newcommand{\goal}{\uchapter{Мета роботи}}
 
 % для створення висновків використаємо команду \uchapter
 \newcommand{\conclusions}{\uchapter{Висновки}}
@@ -319,7 +322,7 @@
 }
 
 % спеціальна команда для вставки лістингів
-\newcommand{\listing}[2]{\singlespacing\lstinputlisting[language=C++, basicstyle=\tiny, breaklines=true, caption={#1}]{#2}\doublespacing}
+\newcommand{\listing}[2]{\singlespacing\lstinputlisting[language=C++, basicstyle=\tiny\ttfamily, breaklines=true, caption={#1}]{#2}\doublespacing}
 
 % нові команди для анотацій
 % двома мовами
