@@ -285,3 +285,6 @@ TSWLatexianTemp*
 
 # some experiments
 docker/
+
+# python files
+__pycache__/
