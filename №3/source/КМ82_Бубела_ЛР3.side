@@ -1,0 +1,422 @@
+{
+  "id": "f6e37107-03ee-40c7-8dfb-18ed899f9919",
+  "version": "2.0",
+  "name": "Test1",
+  "url": "https://kpi.ua/",
+  "tests": [{
+    "id": "3567f667-7c6d-4e7d-ba63-b79b65d0ace5",
+    "name": "Test1",
+    "commands": [{
+      "id": "6a319ae9-fb55-42a1-abae-5f8ff2a27124",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "38d41530-8ea3-487f-8483-c079c0b8cf31",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return window.location.href;",
+      "targets": [],
+      "value": "host"
+    }, {
+      "id": "bb664a9f-4a56-40c7-afa0-7e121a184ab2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Факультети",
+      "targets": [
+        ["linkText=Факультети", "linkText"],
+        ["css=#block-struktura .menu-item:nth-child(4) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Факультети')]", "xpath:link"],
+        ["xpath=//nav[@id='block-struktura']/div/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/faculties')]", "xpath:href"],
+        ["xpath=//div/div[2]/nav/div/ul/li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Факультети')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ffbcf226-bb4c-462d-acd7-02d90b8f98f9",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Приладобудівний факультет",
+      "targets": [
+        ["linkText=Приладобудівний факультет", "linkText"],
+        ["css=.views-row:nth-child(2) a", "css:finder"],
+        ["xpath=//a[contains(text(),'Приладобудівний факультет')]", "xpath:link"],
+        ["xpath=//div[@id='block-bartik-system-main']/div/div/div/div/div[2]/div/span/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/pbf')]", "xpath:href"],
+        ["xpath=//div[2]/div/span/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Приладобудівний факультет')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bd9966ac-8b32-4d5a-98f1-3c0d15d7227d",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=(//h1/span)[1]",
+      "targets": [
+        ["css=.field--name-title", "css:finder"],
+        ["xpath=//div[@id='block-pagetitle']/div/h1/span", "xpath:idRelative"],
+        ["xpath=//h1/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Приладобудівний факультет')]", "xpath:innerText"]
+      ],
+      "value": "faculty_name"
+    }, {
+      "id": "5538537b-40a6-401b-8c55-7b4090cc0bc8",
+      "comment": "",
+      "command": "echo",
+      "target": "${faculty_name}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "28927087-b239-415e-bd07-da14658c5e93",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=//div[contains(@class, 'field field--name-field-site field--type-link field--label-hidden field__item')]/a",
+      "targets": [
+        ["linkText=https://pbf.kpi.ua", "linkText"],
+        ["css=.field--name-field-site > a", "css:finder"],
+        ["xpath=//a[contains(text(),'https://pbf.kpi.ua')]", "xpath:link"],
+        ["xpath=//div[@id='block-bartik-system-main']/div/article/div/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://pbf.kpi.ua')]", "xpath:href"],
+        ["xpath=//article/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'https://pbf.kpi.ua')]", "xpath:innerText"]
+      ],
+      "value": "faculty_link"
+    }, {
+      "id": "8975bd43-52d9-420c-b431-2ca126e3c9a4",
+      "comment": "",
+      "command": "echo",
+      "target": "${faculty_link}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "feae4ba6-e347-4d52-bdc4-2f0e6e84d8b6",
+      "comment": "",
+      "command": "storeAttribute",
+      "target": "xpath=//div/div/article/div/div/p/img@src",
+      "targets": [],
+      "value": "img_link"
+    }, {
+      "id": "c4fcbbae-288d-466d-927a-4ff75101808b",
+      "comment": "",
+      "command": "echo",
+      "target": "${host}${img_link}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "af9a2829-0cfb-4f67-9bc3-8938d3d5386d",
+      "comment": "",
+      "command": "storeXpathCount",
+      "target": "xpath=//span[@itemprop=\"department\"]//a",
+      "targets": [],
+      "value": "departments_count"
+    }, {
+      "id": "63be6154-7746-4626-99fc-db069d0294c7",
+      "comment": "",
+      "command": "store",
+      "target": "0",
+      "targets": [],
+      "value": "i"
+    }, {
+      "id": "f71d273a-24b5-48c6-94dd-3513316daa02",
+      "comment": "",
+      "command": "while",
+      "target": "${i}<${departments_count}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ea6277d7-e75b-4132-8376-578440aea423",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return Number(${i})+1",
+      "targets": [],
+      "value": "i"
+    }, {
+      "id": "303c65d1-6781-4071-beb7-6ab80e8d1e4e",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=(//span[@itemprop=\"department\"]//a)[${i}]",
+      "targets": [
+        ["linkText=кафедра приладобудування - ПБ", "linkText"],
+        ["css=li:nth-child(1) > span > a", "css:finder"],
+        ["xpath=//a[contains(text(),'кафедра приладобудування - ПБ')]", "xpath:link"],
+        ["xpath=//div[@id='block-bartik-system-main']/div/article/div/div[2]/div/ul/li/span/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://kaf-pb.kpi.ua')]", "xpath:href"],
+        ["xpath=//span/a", "xpath:position"],
+        ["xpath=//a[contains(.,'кафедра приладобудування - ПБ')]", "xpath:innerText"]
+      ],
+      "value": "department"
+    }, {
+      "id": "f39eea0e-80cd-4513-8a4b-876821f047f8",
+      "comment": "",
+      "command": "echo",
+      "target": "${department}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "285e0685-31a7-40bc-b5a7-3d943f328032",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d8ecf7e8-a399-438d-a865-cdd9b8871bc9",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "5335e0fc-0123-4b1e-8f8c-0150e336109f",
+    "name": "Test2",
+    "commands": [{
+      "id": "55c35dc3-b377-4599-8058-be7a36c82410",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1f22497d-511c-4a2c-8a89-d29babcb4f5c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Кафедри",
+      "targets": [
+        ["linkText=Факультети", "linkText"],
+        ["css=#block-struktura .menu-item:nth-child(4) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Факультети')]", "xpath:link"],
+        ["xpath=//nav[@id='block-struktura']/div/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/faculties')]", "xpath:href"],
+        ["xpath=//div/div[2]/nav/div/ul/li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Факультети')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a71f8ce-5ea1-47e6-b36d-ba96ba0bf306",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Кафедра інформаційно-телекомунікаційних мереж (КІТМ), ІТС",
+      "targets": [
+        ["linkText=Кафедра інформаційно-телекомунікаційних мереж (КІТМ), ІТС", "linkText"],
+        ["css=.views-row:nth-child(2) a", "css:finder"],
+        ["xpath=//a[contains(text(),'Кафедра інформаційно-телекомунікаційних мереж (КІТМ), ІТС')]", "xpath:link"],
+        ["xpath=//div[@id='block-bartik-system-main']/div/div/div/div/div[2]/div/span/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/web_kitm')]", "xpath:href"],
+        ["xpath=//div[2]/div/span/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Кафедра інформаційно-телекомунікаційних мереж (КІТМ), ІТС')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "aff7274d-bc54-4499-9eaa-7389ee2bbf85",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=(//h1/span)[1]",
+      "targets": [
+        ["css=.field--name-title", "css:finder"],
+        ["xpath=//div[@id='block-pagetitle']/div/h1/span", "xpath:idRelative"],
+        ["xpath=//h1/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Приладобудівний факультет')]", "xpath:innerText"]
+      ],
+      "value": "department_name"
+    }, {
+      "id": "66243b56-f0a4-41b8-85d9-b4e668359848",
+      "comment": "",
+      "command": "echo",
+      "target": "${department_name}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "35f43766-bb71-4947-8d3f-36bea5362eb9",
+      "comment": "",
+      "command": "storeTitle",
+      "target": "",
+      "targets": [],
+      "value": "department_title"
+    }, {
+      "id": "521090cd-5553-4aee-a4ba-a4822ac7d058",
+      "comment": "",
+      "command": "executeScript",
+      "target": "department_title=${department_title}; return department_title.includes(${department_name});",
+      "targets": [],
+      "value": "is_name_in_title"
+    }, {
+      "id": "5bf582c6-3650-403b-ad76-fcb9d5c4a59f",
+      "comment": "",
+      "command": "if",
+      "target": "${is_name_in_title}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2a4de96c-bb4d-4228-a644-d0c9684246e5",
+      "comment": "",
+      "command": "echo",
+      "target": "${department_title}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f5927128-4da4-4a3b-94ae-32c89db7d9a3",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b023a5dd-7380-45d2-b642-d3fdf20cbc3d",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=//blockquote/div/div",
+      "targets": [
+        ["css=blockquote > div > div", "css:finder"],
+        ["xpath=//div[@id='block-bartik-system-main']/div/article/div/div[3]/blockquote/div/div", "xpath:idRelative"],
+        ["xpath=//blockquote/div/div", "xpath:position"]
+      ],
+      "value": "address"
+    }, {
+      "id": "6b67cc6f-9bed-4562-9302-d926f154851c",
+      "comment": "",
+      "command": "executeScript",
+      "target": "address = ${address}; return address.replace(\"Адреса: \", \"\");",
+      "targets": [],
+      "value": "address"
+    }, {
+      "id": "b7838c4d-d753-4a20-99d9-c77540abdcf1",
+      "comment": "",
+      "command": "echo",
+      "target": "${address}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bdddd43c-2ace-4b93-b89d-1f4a54edfd59",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=//p/span[@itemprop=\"telephone\"]",
+      "targets": [],
+      "value": "phone_num"
+    }, {
+      "id": "d060e8c6-55be-43f8-9652-00d84751b97a",
+      "comment": "",
+      "command": "echo",
+      "target": "${phone_num}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a25b5f1d-a33b-4fef-805f-9b6e15a0c716",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=//p/span[@itemprop=\"email\"]",
+      "targets": [],
+      "value": "email"
+    }, {
+      "id": "2d1268cf-2189-405f-bce9-43b3f5af9f07",
+      "comment": "",
+      "command": "executeScript",
+      "target": "email = ${email}; return email.replace(\"(at)\", \"@\");",
+      "targets": [],
+      "value": "email"
+    }, {
+      "id": "7a2bd019-b814-4dcd-b966-b22ed2242406",
+      "comment": "",
+      "command": "echo",
+      "target": "${email}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "78c09876-37c1-48e0-877b-1270afe187d6",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=http://itm-its.kpi.ua/",
+      "targets": [
+        ["linkText=http://itm-its.kpi.ua/", "linkText"],
+        ["css=.field--name-field-site > a", "css:finder"],
+        ["xpath=//a[contains(text(),'http://itm-its.kpi.ua/')]", "xpath:link"],
+        ["xpath=//div[@id='block-bartik-system-main']/div/article/div/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[@href='http://itm-its.kpi.ua/']", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'http://itm-its.kpi.ua/')]", "xpath:innerText"]
+      ],
+      "value": "host"
+    }, {
+      "id": "8cdc20cb-863a-4bf9-867d-4ca283e01577",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return window.location.href;",
+      "targets": [],
+      "value": "host"
+    }, {
+      "id": "c925f4d4-b1de-4ad4-8907-859e392e709a",
+      "comment": "",
+      "command": "storeAttribute",
+      "target": "xpath=//img[@alt='ІТМ']@src",
+      "targets": [],
+      "value": "logo_link"
+    }, {
+      "id": "fcfe3980-6db2-4a8f-b9d3-87e2de725a59",
+      "comment": "",
+      "command": "echo",
+      "target": "${logo_link}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f8af65e-a003-45df-9437-f6595f4a3489",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Співробітники кафедри",
+      "targets": [
+        ["linkText=Співробітники кафедри", "linkText"],
+        ["css=#menu-item-2499 > a", "css:finder"],
+        ["xpath=(//a[contains(text(),'Співробітники кафедри')])[2]", "xpath:link"],
+        ["xpath=//li[@id='menu-item-2499']/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, 'https://itm-its.kpi.ua/vykladachi-kafedry/')])[2]", "xpath:href"],
+        ["xpath=//section/div/ul/li[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6772ab8e-d211-4aea-9d50-74055b083a1f",
+      "comment": "",
+      "command": "store",
+      "target": "12+1",
+      "targets": [],
+      "value": "i"
+    }, {
+      "id": "4417c1be-b4a6-4086-a77b-e993acb3aa30",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=//main[@id='main']/div/div/div/section[${i}]/div/div/div/div/div/section/div/div/div/div/div/div/div/h2",
+      "targets": [
+        ["css=.elementor-element-6d84889 .elementor-heading-title", "css:finder"],
+        ["xpath=//main[@id='main']/div/div/div/section[2]/div/div/div/div/div/section/div/div/div/div/div/div/div/h2", "xpath:idRelative"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'ГЛОБА ЛАРИСА СЕРГІЇВНА')]", "xpath:innerText"]
+      ],
+      "value": "teacher"
+    }, {
+      "id": "96124b33-f179-4242-be16-f7f8f85aafa4",
+      "comment": "",
+      "command": "echo",
+      "target": "${teacher}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d990c6d5-e103-459a-8627-c40cf08d672c",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "4533f819-a998-4fb9-be11-7e21e62383ec",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["3567f667-7c6d-4e7d-ba63-b79b65d0ace5"]
+  }],
+  "urls": ["https://kpi.ua/"],
+  "plugins": []
+}

@@ -1,0 +1,317 @@
+% ******** Приклад оформлення документа за ДСТУ 3008-95 ********
+% ******************** автор: Тавров Д. Ю. *********************
+
+% зазначаємо стильовий файл, який будемо використовувати
+\documentclass{../../dstu}
+
+% починаємо верстку документа
+\begin{document}
+
+% створимо титульний аркуш
+% за допомогою спеціальної команди
+% \maketitlepage{params},
+% де params --- це розділені комами пари "параметр={значення}"
+\maketitlepage{
+% StudentName --- прізвище, ініціали студента
+	StudentName={Бубела Д. В.},
+% StudentMale --- стать студента (true, якщо чоловік, false --- якщо жінка)
+	StudentMale=true,
+% StudentGroup --- група студента
+	StudentGroup={КМ-82},
+% Title --- назва
+	Title={Звіт\\із лабораторної роботи №1\\із дисципліни \invcommas{Автоматизоване тестування програмного забезпечення}\\на тему\\Тестування веб-застосунків (web-application) за допомогою Selenium IDE.},
+% SupervisorDegree --- науковий ступінь, учене звання керівника роботи
+% якщо наукового ступеня немає, можна відповідний рядочок пропустити
+	SupervisorDegree={\textit{асистент}},
+% SupervisorName --- прізвище, ініціали керівника роботи
+	SupervisorName={\textit{Громова В. В.}}
+}
+% створюємо зміст
+\tableofcontents
+
+% створюємо Мету роботи
+\goal
+
+Ознайомитися з \invcommas{Selenium IDE}.
+Навчитися використовувати селеніум для автоматизованого тестування сайтів,
+автоматизовувати роботу з веб застосунками в браузері.
+
+\textbf{Варіант 2}
+\begin{enumerate}
+ \item Приладобудівний факультет.
+ \item Кафедра інформаційно-телекомунікаційних мереж (КІТМ), ІТС.
+\end{enumerate}
+
+\textbf{Завдання 1}
+\begin{enumerate}[{label={}}]
+\item Створити скрипт (в термінології Selenium IDE – Test1), що виконує наступні дії:
+\begin{enumerate}[{label={1.\arabic*.}}]
+    \item Зайти на сайт НТУУ КПІ ім. Ігоря Сікорського https://kpi.ua
+    \item У відповідності до варіанту перейти на сторінку «Інститути» або «Факультети», користуючись існуючими посиланнями блоку СТРУКТУРА внизу головної сторінки https://kpi.ua
+    \item Користуючись існуючими посиланнями з поточної сторінки,  у відповідності до варіанту перейти на сторінку заданого факультету / інституту.
+    \item Вивести в консоль назву факультету / інституту, одержану зі сторінки даного факультету / інституту.
+    \item Вивести в консоль посилання на офіційний сайт, розташоване одразу під назвою факультету / інституту.
+    \item Вивести в консоль повний url зображення, розташованого одразу під назвою факультету / інституту. Якщо зображення відсутнє або не завантажилось, вивести в консоль повідомлення «no image».
+    \item Вивести в консоль повний список кафедр заданого факультету / інституту. 
+    \item Закрити браузер.
+\end{enumerate}
+\end{enumerate}
+
+\textbf{Завдання 2}
+\begin{enumerate}[{label={}, resume}]
+\item Створити скрипт (в термінології Selenium IDE – Test2), що виконує наступні дії:
+\begin{enumerate}[{resume, label={2.\arabic*.}}]
+    \item Зайти на сайт НТУУ КПІ ім. Ігоря Сікорського https://kpi.ua
+    \item Перейти на сторінку «Кафедри» за посиланням, що знаходиться в блоці СТРУКТУРА внизу головної сторінки https://kpi.ua). 
+    \item У відповідності до варіанту перейти на сторінку заданої кафедри, користуючись посиланням зі сторінки «Кафедри».
+    \item Вивести в консоль назву кафедри, одержану зі сторінки.
+    \item Проаналізувати title: якщо назва кафедри міститься в title, то вивести вміст title в консоль.
+    \item Вивести в консоль контактну інформацію про кафедру: 
+    - адресу;
+    - телефони;
+    - e-mail, 
+    \item Вивести в консоль повний url до зображення – логотипу кафедри. Якщо зображення відсутнє або не завантажилось, вивести в консоль повідомлення «absent logo».
+    \item Знайти на сторінці список викладачів кафедри і вивести в консоль Прізвище Ім’я По-батькові і-го викладача у списку, де i– порядковий номер викладача у списку, за Вашим бажанням.
+    \item Закрити браузер. 
+\end{enumerate}
+\end{enumerate}
+
+
+
+\chapter{Постановка задачі}
+\label{chap:condition}
+\textbf{Завдання 1}\\
+Програма повинна приймати ввід користувача для 2х точок по дві координати кожна. Потрібно створити функцію, що реалізовуватиме алгоритм який визначає, яка з точок знаходиться ближче до початку координат та повертає результат.
+
+\textbf{Завдання 2}\\
+Програма повинна реалізовувати функцію, що визначає мінімальний та максимальний елемент в масиві представленому списком та рахує суму між ними (включно).
+
+Модульні тести повинні бути в окремому файлі та тестувати програму, що знаходиться в іншому файлі. Тести не повинні залежати один від одного.
+\chapter{Основна частина}
+\label{chap:main}
+Програми будуть створені таким чином, що дозволяло б їх тестування фреймворком \invcommas{unittest}, тобто основна логічна частина має бути оформлена в функцію, що повертає значення, за яким можна перевірити коректність роботи програми або алгоритму.
+
+\textbf{Завдання 1}
+
+Згідно умові завдання введення даних повинне бути користувачем, тобто з 'stdin'. Для забезпечення передачі корректних даних функції, що буде їх опрацьовувати програма \ref{lst:prog1}, має бути створена додаткова функція fl\_input, що не пропускає далі некоректного вводу від користувача. Також повинна бути реалізація інформування користувача про необхідні дії для забезпечення роботи програми. Основну логічну задачі програми буде виконувати функція closer(A, B). Вона приймає дві точки, на яких власне і буде застосовуватись мета програми. Коли відстань від одної з них до початку координат буде більшою за відстань іншої точки до початку координат --- вона буде додаватись до спеціального списку c[] з точками з найменшою відстанню до початку координат. Якщо найменшої точки не буде існувати --- список c[] буде пустим. Функція повертає список найменших точок.
+
+Для роботи з тестами буде створено клас Prog\_1Test що буде дочірнім від класу unittest.TestCase. Всередині класу будуть використовуватись методи assertEqual та assertRaises. Тестування запускається за допомогою unittest.main() коли програма тестування виконується як основна програма виконання.
+
+\textbf{Завдання 2}
+
+Буде створена функція sum\_min\_max(lst), яка буде визначати мінімальний елемент з масиву, максимальний, зберігатиме їх індекси та рахуватиме суму слайсу списку з першим і останнім елементом, мінімуму та максимуму початкового списку відповідно. В завданні чітко не вказані дії при існуванні кількох максимумів та/або мінімумів, тому програма перевірятиметься на знаходження суми в будь-яких варіантах, тобто мінімум може вибиратися з мінімумів довільно, так само і з максимумами. Конкретна реалізація буде шукати перше входження відповідних елементів. Пошук індексів елементів здійснюватиметься функціями min та max з порядкових номерів елементів з додатковим аргументом функції що порівнює елементи потрібного списку.
+
+Для роботи з тестами буде створено клас Prog\_2Test що буде дочірнім від класу unittest.TestCase. Всередині класу будуть використовуватись методи assertEqual, assertIn та assertRaises. Тестування запускається за допомогою unittest.main() коли програма тестування виконується як основна програма виконання.
+\chapter{Розробка тест-кейсів}
+% створюємо нумерований список
+\begin{enumerate}
+	\item перший елемент нумерованого списку;
+	\item другий елемент нумерованого списку;
+	\item тощо.
+\end{enumerate}
+% створюємо Висновки
+\conclusions
+
+Цей шаблон потрібно використовувати під час підготовки документації на кафедрі ПМА. У ньому враховано вимоги кафедри ПМА, які уточнюють положення ДСТУ 3008-95 \invcommas{Документація. Звіти у сфері науки і техніки. Структура і правила оформлення}.
+
+Текст висновків.
+
+Текст висновків.
+	
+% створюємо перелік посилань
+\begin{thebibliography}
+	\bibitem{seleniumdocs} Selenium IDE Documentation [Електронний ресурс]. – 2019. – Режим доступу до ресурсу: https://www.selenium.dev/selenium-ide/docs/en/introduction/getting-started.
+	\bibitem{xpathdocs} MDN contributors. XSLT/XPath Reference [Електронний ресурс] / MDN contributors. – 2020. – Режим доступу до ресурсу: https://developer.mozilla.org/en-US/docs/Web/XPath.
+\end{thebibliography}
+
+% створюємо додаток
+\append{Текст програм, які тестуються}
+\begin{singlespacing}
+\begin{lstlisting}[language=Python, basicstyle=\tiny, breaklines=true, caption=prog\_1.py, label={lst:prog1}]
+def closer(A, B):
+    c = []
+    if A[0]**2 + A[1]**2 < B[0]**2 + B[1]**2:
+        c.append(A)
+    if A[0]**2 + A[1]**2 > B[0]**2 + B[1]**2:
+        c.append(B)
+    return c
+
+
+def fl_input(message):
+    isCorrect = False
+    while not isCorrect:
+        try:
+            fl = float(input(message))
+        except ValueError:
+            print("Невірний формат вводу")
+        else:
+            isCorrect = True
+    return fl
+
+
+if __name__ == '__main__':
+    print("Визначення точки з ")
+    print("Введіть дані точки А (х1, у1)")
+    x1 = fl_input("x1 = ")
+    y1 = fl_input("y1 = ")
+    print("Введіть дані точки B (х2, у2)")
+    x2 = fl_input("x2 = ")
+    y2 = fl_input("y2 = ")
+    c = closer((x1, y1), (x2, y2))
+    if len(c) == 0:
+        print("Точки знаходяться на однаковій відстані")
+    else:
+        print(f"Точка з координатами {c[0]} знадиться ближче до початку координат")
+
+\end{lstlisting}
+\end{singlespacing}
+
+\begin{singlespacing}
+\begin{lstlisting}[language=Python, basicstyle=\tiny, breaklines=true, caption=prog\_2.py]
+def sum_min_max(lst):
+    if not lst:
+        return 0
+    minmax_idx = [min(range(len(lst)), key=lst.__getitem__),
+                  max(range(len(lst)), key=lst.__getitem__)]
+    minmax_idx.sort()
+    return sum(lst[minmax_idx[0]:minmax_idx[1] + 1])
+\end{lstlisting}
+\end{singlespacing}
+
+\append{Текст модулів, що реалізують автоматичне тестування}
+
+\begin{singlespacing}
+\begin{lstlisting}[language=Python, basicstyle=\tiny, breaklines=true, caption=test\_prog\_1.py]
+import prog_1
+import unittest
+
+
+class Prog_1Test(unittest.TestCase):
+
+    def test_simple_equality(self):
+        self.assertEqual(prog_1.closer((2.2, 3.3), (-3.3, -2.2)), [])
+
+    def test_int_compatibility(self):
+        self.assertEqual(prog_1.closer((22, 33), (-31, -24)), [(-31, -24)])
+
+    def test_big_numbers(self):
+        self.assertEqual(prog_1.closer(
+            (1000000000000000000000.2, -90000000000000000000000.4), (1221221, 32312321)),
+            [(1221221, 32312321)])
+
+    def test_negative_test(self):
+        self.assertEqual(prog_1.closer((-9.0, 9.0), (1.1, 1.1)), [(1.1, 1.1)])
+
+    def test_bad_data(self):
+        self.assertRaises(TypeError, prog_1.closer, (-9.0, 9.0), (1.1, 'o'))
+
+
+if __name__ == '__main__':
+    unittest.main()
+\end{lstlisting}
+\end{singlespacing}
+
+
+\begin{singlespacing}
+\begin{lstlisting}[language=Python, basicstyle=\tiny, breaklines=true, caption=test\_prog\_2.py]
+import prog_2
+import unittest
+
+
+class Prog_2Test(unittest.TestCase):
+
+    def test_straight_sum(self):
+        self.assertEqual(
+            prog_2.sum_min_max(
+                [1, -6, 0, 34, 434]
+            ),
+            462
+        )
+
+    def test_empty(self):
+        self.assertEqual(
+            prog_2.sum_min_max(
+                []
+            ),
+            0
+        )
+
+    def test_one(self):
+        self.assertEqual(
+            prog_2.sum_min_max(
+                [41]
+            ),
+            41
+        )
+
+    def test_two(self):
+        self.assertEqual(
+            prog_2.sum_min_max(
+                [1, 2]
+            ),
+            3
+        )
+
+    def test_reverse_sum(self):
+        self.assertEqual(
+            prog_2.sum_min_max(
+                [1, 434, 0, 34, -6]
+            ),
+            462
+        )
+
+    def test_float_compatibility(self):
+        self.assertEqual(
+            prog_2.sum_min_max(
+                [1.32, -6.23, 0, 34, 434.001]
+            ),
+            461.77099999999996
+        )
+
+    def test_negative_test(self):
+        self.assertEqual(
+            prog_2.sum_min_max(
+                [-794, -43, -8989, -11, -89]
+            ),
+            -9000
+        )
+
+    def test_multiple_minmax(self):
+        self.assertIn(
+            prog_2.sum_min_max(
+                [-89, 1, 90, -89, 2, 90]
+            ),
+            [2, 5, 1, 3]
+        )
+
+    def test_nested_lst(self):
+        self.assertRaises(TypeError, prog_2.sum_min_max, [12, [21, 32]])
+
+    def test_bad_type_sum(self):
+        self.assertRaises(TypeError, prog_2.sum_min_max, [1, 'o', 2])
+
+    def test_bad_type_cmp(self):
+        self.assertRaises(TypeError, prog_2.sum_min_max, [1, 2, 'o'])
+
+
+if __name__ == '__main__':
+    unittest.main()
+\end{lstlisting}
+\end{singlespacing}
+
+\append{Скріншоти результатів виконання автотестів}
+
+\begin{figure}[!htp]
+	\centering
+	\includegraphics[scale=0.5]{PNG/test_prog_1.png}
+	\caption{Тестування програми 1}
+	\label{fig:figure1}
+\end{figure}
+
+\begin{figure}[!htp]
+	\centering
+	\includegraphics[scale=0.5]{PNG/test_prog_2.png}
+	\caption{Тестування програми 2}
+	\label{fig:figure2}
+\end{figure}
+\end{document}
