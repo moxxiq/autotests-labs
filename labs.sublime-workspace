@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"time",
+				"timeout=\tparam"
+			],
+			[
+				"err",
+				"err_value\t(qe_roots_acceptance_test.py)"
+			],
+			[
+				"ou",
+				"out_value\t(qe_roots_acceptance_test.py)"
+			],
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"in",
+				"input_value\t(qe_roots_acceptance_test.py)"
+			],
+			[
+				"run",
+				"run_script\t(qe_roots_acceptance_test.py)"
+			],
+			[
+				"ge",
+				"getpreferredencoding\tfunction"
+			],
+			[
 				"on",
 				"on_startup\tabc"
 			],
@@ -132,10 +160,6 @@
 				"nfunc\tabc"
 			],
 			[
-				"in",
-				"info\tfunction"
-			],
-			[
 				"ch",
 				"ch_id\t(PostgreSQL.py)"
 			],
@@ -170,10 +194,6 @@
 			[
 				"can",
 				"cancel\t(add.py)"
-			],
-			[
-				"if",
-				"if\tIf Condition"
 			],
 			[
 				"st",
@@ -316,10 +336,6 @@
 				"combs\tabc"
 			],
 			[
-				"ge",
-				"gened\tabc"
-			],
-			[
 				"ba",
 				"background-color\tproperty"
 			]
@@ -327,6 +343,32 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "№2/source/task_1_acceptance_test.py",
+			"settings":
+			{
+				"buffer_size": 822,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/moxxiq/KPI/Automatic testing/QE_ROOTS_ACCEPTANCE/qe_roots_acceptance_test.py",
+			"settings":
+			{
+				"buffer_size": 2850,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/moxxiq/KPI/Automatic testing/CALC_ACCEPTANCE/calc_acceptance_test_2.py",
+			"settings":
+			{
+				"buffer_size": 1707,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"build_system_choices":
@@ -356,16 +398,32 @@
 		"selected_items":
 		[
 			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"anaconda",
+				"Anaconda: Display object docs"
+			],
+			[
+				"error",
+				"Anaconda: Show error list"
+			],
+			[
 				"inst",
 				"Package Control: Install Package"
 			],
 			[
 				"ins",
 				"Package Control: Install Package"
-			],
-			[
-				"remo",
-				"Package Control: Remove Package"
 			],
 			[
 				"remove",
@@ -412,10 +470,6 @@
 				"Package Control: Remove Package"
 			],
 			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
 				"Package Control: ins",
 				"Package Control: Install Package"
 			],
@@ -454,21 +508,33 @@
 	},
 	"expanded_folders":
 	[
-		"/home/moxxiq/KPI/Automatic testing/Labs"
+		"/home/moxxiq/KPI/Automatic testing/Labs",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source"
 	],
 	"file_history":
 	[
+		"/home/moxxiq/.config/sublime-text-3/Packages/User/Anaconda.sublime-settings",
+		"/home/moxxiq/KPI/Automatic testing/CALC_ACCEPTANCE/calc_acceptance_test_2.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/labs.sublime-project",
+		"/usr/lib/python3.8/subprocess.py",
+		"/home/moxxiq/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/moxxiq/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/home/moxxiq/.config/sublime-text-3/Packages/Anaconda/Default (Linux).sublime-keymap",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task_1_acceptance_test.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task1.py",
+		"/home/moxxiq/KPI/Automatic testing/CALC_ACCEPTANCE/calc_acceptance_test.py",
+		"/home/moxxiq/KPI/Automatic testing/power_x_n.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task2.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/test_prog_1.py",
+		"/home/moxxiq/KPI/Automatic testing/CALC_ACCEPTANCE/calc.py",
 		"/home/moxxiq/Projects/top-topic/toptopic/rating/views.py",
 		"/home/moxxiq/Projects/top-topic/toptopic/toptopic/settings.py",
 		"/home/moxxiq/Projects/top-topic/toptopic/toptopic/urls.py",
 		"/home/moxxiq/Projects/top-topic/toptopic/rating/urls.py",
-		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task2.py",
 		"/home/moxxiq/Projects/top-topic/toptopic.sublime-project",
 		"/home/moxxiq/Projects/top-topic/toptopic/topicpolls/views.py",
 		"/home/moxxiq/Projects/top-topic/toptopic/topicpolls/urls.py",
-		"/home/moxxiq/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
-		"/home/moxxiq/.config/sublime-text-3/Packages/User/Anaconda.sublime-settings",
-		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task1.py",
 		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/notify_admins.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№3/source/КМ82_Бубела_ЛР3.side",
 		"/home/moxxiq/KPI/Automatic testing/chrome.py",
@@ -502,7 +568,6 @@
 		"/home/moxxiq/KPI/python/gmbot/GM/__init__.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/prog_1.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/prog_2.py",
-		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/test_prog_1.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/test_prog_2.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№1/ latex/SRC/prog_1.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№1/ latex/document2.tex",
@@ -576,20 +641,11 @@
 		"/home/moxxiq/KPI/python/TgBotTemplate/middlewares/throttling.py",
 		"/home/moxxiq/KPI/python/TgBotTemplate/data/config.py",
 		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/redis/consts.py",
-		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/redis/__init__.py",
-		"/home/moxxiq/KPI/python/gmbot/TgBot/data/__init__.py",
-		"/home/moxxiq/Downloads/aiogoogle.json",
-		"/home/moxxiq/KPI/python/gmbot/readEmail.py",
-		"/home/moxxiq/Downloads/Telegram Desktop/ChatExport_2020-08-17/parse.py",
-		"/home/moxxiq/KPI/python/gmbot/GM/config.py",
-		"/home/moxxiq/Downloads/Telegram Desktop/ChatExport_2020-08-17/600.json",
-		"/home/moxxiq/KPI/python/gmbot/jj.json",
-		"/home/moxxiq/DRU/DRU-files/m2.1.py",
-		"/home/moxxiq/DRU/m2.1.py"
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/redis/__init__.py"
 	],
 	"find":
 	{
-		"height": 36.0
+		"height": 64.0
 	},
 	"find_in_files":
 	{
@@ -603,6 +659,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"lint",
+			"ignore",
+			"doc",
+			"docstrings",
+			"input_value",
+			"Decimal",
+			"SIGNATURE",
+			"expect_str",
 			"\\.(\\d+)",
 			"\\.\\d+",
 			".",
@@ -722,15 +786,7 @@
 			"types",
 			"Dispatcher",
 			"dp",
-			"sys",
-			"os",
-			"app",
-			"web",
-			"current_states",
-			"user_creds",
-			"Aiogoogle",
-			"config",
-			"TgB"
+			"sys"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -819,8 +875,105 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "№2/source/task_1_acceptance_test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 822,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								378,
+								378
+							]
+						],
+						"settings":
+						{
+							"complete_all_parameters": false,
+							"complete_parameters": false,
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "/home/moxxiq/KPI/Automatic testing/QE_ROOTS_ACCEPTANCE/qe_roots_acceptance_test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2850,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1589,
+								1589
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 503.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/moxxiq/KPI/Automatic testing/CALC_ACCEPTANCE/calc_acceptance_test_2.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1707,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								590,
+								590
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 138.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -841,11 +994,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -862,6 +1022,10 @@
 	"output.find_results":
 	{
 		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 249.0
 	},
 	"pinned_build_system": "",
 	"project": "labs.sublime-project",
@@ -881,12 +1045,12 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 594.0,
 		"last_filter": "",
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 451.0
 	},
 	"select_symbol":
 	{
@@ -897,7 +1061,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
