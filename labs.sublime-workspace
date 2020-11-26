@@ -1,0 +1,913 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"on",
+				"on_startup\tabc"
+			],
+			[
+				"asyn",
+				"asyncio\t(gmpart.py)"
+			],
+			[
+				"app_te",
+				"app_testing_cleanup\tabc"
+			],
+			[
+				"aiogoog",
+				"aiogoogle_creds\tabc"
+			],
+			[
+				"mes",
+				"messages_num\t(gmpart.py)"
+			],
+			[
+				"aio",
+				"aiogoogle's\tabc"
+			],
+			[
+				"class",
+				"classmethod\t(PostgreSQL.py)"
+			],
+			[
+				"min",
+				"minmax_idx\tstatement"
+			],
+			[
+				"max",
+				"max_idx\tstatement"
+			],
+			[
+				"__get",
+				"__getitem__\tfunction"
+			],
+			[
+				"fl",
+				"fl_input\tabc"
+			],
+			[
+				"te",
+				"text\tabc"
+			],
+			[
+				"tele",
+				"telegram_tags\tabc"
+			],
+			[
+				"WE",
+				"WEBAPP_PORT\tabc"
+			],
+			[
+				"refre",
+				"refresh_token\tabc"
+			],
+			[
+				"lo",
+				"loader\tabc"
+			],
+			[
+				"file",
+				"filename\t(main.py)"
+			],
+			[
+				"mess",
+				"messages\tabc"
+			],
+			[
+				"retu",
+				"return\tkeyword"
+			],
+			[
+				"app",
+				"append\tfunction"
+			],
+			[
+				"an",
+				"answers_html\tfunction"
+			],
+			[
+				"cha",
+				"chat_id\tabc"
+			],
+			[
+				"ta",
+				"create_task\tfunction"
+			],
+			[
+				"async",
+				"asyncio\tabc"
+			],
+			[
+				"as",
+				"asyncio\tabc"
+			],
+			[
+				"asy",
+				"asyncio\tabc"
+			],
+			[
+				"use",
+				"user_creds\tabc"
+			],
+			[
+				"usdr",
+				"user_creds\tabc"
+			],
+			[
+				"us",
+				"user_creds\tstatement"
+			],
+			[
+				"add",
+				"add_routes"
+			],
+			[
+				"don",
+				"doesn't\t(gmpart.py)"
+			],
+			[
+				"n",
+				"nfunc\tabc"
+			],
+			[
+				"in",
+				"info\tfunction"
+			],
+			[
+				"ch",
+				"ch_id\t(PostgreSQL.py)"
+			],
+			[
+				"cu",
+				"current_states\tabc"
+			],
+			[
+				"crea",
+				"create_db\t(PostgreSQL.py)"
+			],
+			[
+				"create",
+				"create_db_command\tabc"
+			],
+			[
+				"ClI",
+				"CLIENT_CREDS\t(add.py)"
+			],
+			[
+				"get",
+				"get_me\tabc"
+			],
+			[
+				"call",
+				"callback_data_gmail\tabc"
+			],
+			[
+				"state",
+				"state_account\tabc"
+			],
+			[
+				"can",
+				"cancel\t(add.py)"
+			],
+			[
+				"if",
+				"if\tIf Condition"
+			],
+			[
+				"st",
+				"state_account\tabc"
+			],
+			[
+				"states",
+				"current_states"
+			],
+			[
+				"sh",
+				"show_alert\tabc"
+			],
+			[
+				"che",
+				"check_markup\tabc"
+			],
+			[
+				"callba",
+				"callback_data\tabc"
+			],
+			[
+				"check",
+				"check_markup\t(account_check.py)"
+			],
+			[
+				"acc",
+				"AccountCheck"
+			],
+			[
+				"callb",
+				"callback_data\tabc"
+			],
+			[
+				"In",
+				"InlineKeyboardButton\tmodule"
+			],
+			[
+				"chat",
+				"chat_id\tabc"
+			],
+			[
+				"auth",
+				"auth_uri\tabc"
+			],
+			[
+				"G",
+				"GMpart\tabc"
+			],
+			[
+				"Add",
+				"AddGmail\tclass"
+			],
+			[
+				"T",
+				"TgBot\tabc"
+			],
+			[
+				"ser",
+				"server_routes\tabc"
+			],
+			[
+				"ex",
+				"extension\tabc"
+			],
+			[
+				"ms",
+				"msgs\tabc"
+			],
+			[
+				"raw",
+				"raw_messages\tabc"
+			],
+			[
+				"messa",
+				"messages\tabc"
+			],
+			[
+				"me",
+				"messages_ids\tabc"
+			],
+			[
+				"bu",
+				"build_user_creds\t(main.py)"
+			],
+			[
+				"Cli",
+				"CLIENT_CREDS\tabc"
+			],
+			[
+				"TES",
+				"TEST_CLIENT_CREDS\tabc"
+			],
+			[
+				"GM",
+				"Gmpart"
+			],
+			[
+				"TE",
+				"test_user_creds"
+			],
+			[
+				"clie",
+				"client_creds\tabc"
+			],
+			[
+				"gm",
+				"gmpart\tabc"
+			],
+			[
+				"gmpa",
+				"gmpart\t(__init__.py)"
+			],
+			[
+				"user",
+				"user_creds\tabc"
+			],
+			[
+				"gmpar",
+				"gmpart_api\tabc"
+			],
+			[
+				"s",
+				"state\tabc"
+			],
+			[
+				"au",
+				"authorize_uri\t(gmpart.py)"
+			],
+			[
+				"nu",
+				"number\tabc"
+			],
+			[
+				"bi",
+				"binary\tabc"
+			],
+			[
+				"com",
+				"combs\tabc"
+			],
+			[
+				"ge",
+				"gened\tabc"
+			],
+			[
+				"ba",
+				"background-color\tproperty"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"sch",
+				"UI: Select Color Scheme"
+			],
+			[
+				"sche",
+				"UI: Select Color Scheme"
+			],
+			[
+				"scheme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"the",
+				"UI: Select Theme"
+			],
+			[
+				"schem",
+				"UI: Select Color Scheme"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"them",
+				"UI: Select Theme"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remoe",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 202.0,
+		"history":
+		[
+			"exec('m2.q.py')",
+			"exec m2.q.py",
+			"exec",
+			"python m2.1.py",
+			"python ",
+			"context_menu"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/moxxiq/KPI/Automatic testing/Labs"
+	],
+	"file_history":
+	[
+		"/home/moxxiq/Projects/top-topic/toptopic/rating/views.py",
+		"/home/moxxiq/Projects/top-topic/toptopic/toptopic/settings.py",
+		"/home/moxxiq/Projects/top-topic/toptopic/toptopic/urls.py",
+		"/home/moxxiq/Projects/top-topic/toptopic/rating/urls.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task2.py",
+		"/home/moxxiq/Projects/top-topic/toptopic.sublime-project",
+		"/home/moxxiq/Projects/top-topic/toptopic/topicpolls/views.py",
+		"/home/moxxiq/Projects/top-topic/toptopic/topicpolls/urls.py",
+		"/home/moxxiq/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/home/moxxiq/.config/sublime-text-3/Packages/User/Anaconda.sublime-settings",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task1.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/notify_admins.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№3/source/КМ82_Бубела_ЛР3.side",
+		"/home/moxxiq/KPI/Automatic testing/chrome.py",
+		"/home/moxxiq/Projects/dou_parser/services/parser/widgets/project/db.py",
+		"/home/moxxiq/Projects/dou_parser/services/parser/widgets/project/echo_bot.py",
+		"/home/moxxiq/Projects/dou_parser/services/parser/start.py",
+		"/home/moxxiq/Projects/dou_parser/services/parser/config.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/users/last.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/users/add.py",
+		"/home/moxxiq/KPI/python/gmbot/main.py",
+		"/home/moxxiq/KPI/python/lewis-bots/main.py",
+		"/home/moxxiq/KPI/python/gmbot/GM/gmpart.py",
+		"/home/moxxiq/KPI/python/lewis-bots/GM/gmpart.py",
+		"/home/moxxiq/KPI/python/gmbot/DB/PostgreSQL.py",
+		"/home/moxxiq/KPI/python/gmbot/config.py",
+		"/home/moxxiq/Projects/dou_parser/services/parser/widgets/tests/fixtures.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/dstu.cls",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/latex/Бубела Лаб 2.tex",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/xe_dstu.cls",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/xe_document.tex",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/document.tex",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№2/dstu.cls",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/loader.py",
+		"/home/moxxiq/KPI/python/gmbot/loader.py",
+		"/home/moxxiq/.config/sublime-merge/Packages/User/Preferences.sublime-settings",
+		"/home/moxxiq/.config/sublime-merge/Packages/User/Default (Linux).sublime-keymap",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/misc/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/DB/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/GM/__init__.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/prog_1.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/prog_2.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/test_prog_1.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/test_prog_2.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№1/ latex/SRC/prog_1.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№1/ latex/document2.tex",
+		"/home/moxxiq/Downloads/power_x_n_test.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№1/source/test_calc2.py",
+		"/home/moxxiq/KPI/python/lewis-bots/TgBot/handlers/users/last.py",
+		"/home/moxxiq/Downloads/\"I'm tryna record right but......\".eml",
+		"/home/moxxiq/KPI/python/lewis-bots/TgBot/handlers/users/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/users/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/users/help.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/users/echo.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/misc/throttling.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/misc/logging.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/filters/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/users/start.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/states/add.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/middlewares/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/middlewares/throttling.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/keyboards/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/data/config.py",
+		"/home/moxxiq/KPI/python/lewis-bots/DB/PostgreSQL.py",
+		"/home/moxxiq/KPI/python/lewis-bots/TgBot/handlers/users/add.py",
+		"/home/moxxiq/asynciotest.py",
+		"/home/moxxiq/KPI/python/test/main.py",
+		"/home/moxxiq/KPI/python/test/module/m.py",
+		"/home/moxxiq/KPI/python/test/module/n.py",
+		"/home/moxxiq/KPI/python/lewis-bots/config.py",
+		"/home/moxxiq/KPI/python/lewis-bots/TgBot/data/config.py",
+		"/home/moxxiq/KPI/python/gmbot/config example.py",
+		"/home/moxxiq/KPI/python/gmbot/TRASH/read_test.py",
+		"/home/moxxiq/KPI/python/lewis-bots/TgBot/loader.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/get_me.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/keyboards/inline/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/keyboards/inline/account_check.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/states/__init__.py",
+		"/home/moxxiq/KPI/python/lewis-bots/TgBot/handlers/users/start.py",
+		"/home/moxxiq/KPI/python/gmbot/index.html",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/utils/notify_admins.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/errors/error_handler.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/errors/__init__.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/filters/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/.env.dist",
+		"/home/moxxiq/KPI/python/gmbot/.env.dist",
+		"/home/moxxiq/.config/sublime-text-3/Packages/Anaconda/README.md",
+		"/home/moxxiq/KPI/python/lewis-bots/Lewis.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/data/config.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/keyboards/inline/__init__.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/keyboards/__init__.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/loader.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/middlewares/__init__.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/middlewares/throttling.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/loader.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/app.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/handlers/__init__.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/utils/__init__.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/utils/misc/throttling.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/handlers/users/help.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/utils/misc/logging.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/handlers/users/start.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/handlers/users/echo.py",
+		"/home/moxxiq/KPI/python/aiogram-bot-template/utils/misc/__init__.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/filters/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/app.py",
+		"/home/moxxiq/KPI/python/gmbot/read_test.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/app.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/handlers/users/start.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/handlers/__init__.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/handlers/errors/error_handler.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/keyboards/__init__.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/middlewares/throttling.py",
+		"/home/moxxiq/KPI/python/TgBotTemplate/data/config.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/redis/consts.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/redis/__init__.py",
+		"/home/moxxiq/KPI/python/gmbot/TgBot/data/__init__.py",
+		"/home/moxxiq/Downloads/aiogoogle.json",
+		"/home/moxxiq/KPI/python/gmbot/readEmail.py",
+		"/home/moxxiq/Downloads/Telegram Desktop/ChatExport_2020-08-17/parse.py",
+		"/home/moxxiq/KPI/python/gmbot/GM/config.py",
+		"/home/moxxiq/Downloads/Telegram Desktop/ChatExport_2020-08-17/600.json",
+		"/home/moxxiq/KPI/python/gmbot/jj.json",
+		"/home/moxxiq/DRU/DRU-files/m2.1.py",
+		"/home/moxxiq/DRU/m2.1.py"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\\.(\\d+)",
+			"\\.\\d+",
+			".",
+			"... ",
+			"\\d+\\.",
+			"2.",
+			"\\d+\\.",
+			"\\d\\.\\d+\\.",
+			"\\d\\.\\d\\.",
+			"\\frac",
+			"word",
+			"4",
+			"43",
+			"}",
+			"{",
+			"\n",
+			"\n ",
+			",",
+			"\n ",
+			"npm:",
+			" exists in filesystem",
+			"\n",
+			"\n ",
+			",",
+			"\n ",
+			"CLIENT_CREDS",
+			"asyncio",
+			"aiogoogle",
+			"get_gmail_message",
+			"gmpart",
+			"create_secret",
+			"state",
+			"messages_list",
+			"get_email_address",
+			"get_gmail_message",
+			"gmpart_api",
+			"build_user_creds",
+			"get_gmai",
+			"get_",
+			"user_creds",
+			"creds",
+			"user_",
+			"user_creds",
+			"user_",
+			"aiogoogle",
+			"user_cre",
+			"user",
+			"user_creds",
+			"gmpart_api",
+			"__gmpart_api",
+			"gmpart_api",
+			"authoriz",
+			"user_creds",
+			"user_cr",
+			"aiogoogle",
+			"get_email_address",
+			"gmpart_api",
+			"__gmpart_api",
+			"Gmpart",
+			"gmpart_api",
+			"state",
+			"create_secret",
+			"create",
+			"au",
+			"\n",
+			"\\d+\\.",
+			"3.",
+			"\\d+\\.",
+			"test_2_empty",
+			"_",
+			"(self):\n",
+			"def test_",
+			":\\n.+",
+			"escape",
+			"strip",
+			"soup",
+			"os",
+			"BeautifulSoup",
+			"make_email",
+			"get_gmail_message",
+			"get_gmail_creds",
+			"gmail_API",
+			"Gmpart",
+			"gmpart_api",
+			"Bot",
+			"TgBot",
+			"dp",
+			"middlewares",
+			"dp",
+			"gmpart_api",
+			"Tgbot",
+			"CLIENT_CREDS",
+			"Gmpart",
+			"TgBot",
+			"dp",
+			"dp.",
+			"TgBot",
+			"Tgbot",
+			"postgresq",
+			"Gmpart",
+			"asyncio",
+			"message.",
+			"part.get_content()",
+			"self.user_creds",
+			"types",
+			"os",
+			"TgBot",
+			"PostgreSQL",
+			"Bot",
+			"TgBot",
+			"PostgreSQL",
+			"Gmpart",
+			"gmpart_api",
+			"web",
+			"psqldb",
+			"gmpart_api",
+			"types",
+			"Dispatcher",
+			"dp",
+			"sys",
+			"os",
+			"app",
+			"web",
+			"current_states",
+			"user_creds",
+			"Aiogoogle",
+			"config",
+			"TgB"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"+\\1/60",
+			"+?1",
+			"+#1",
+			"d+",
+			"+",
+			"",
+			"\\\\item ",
+			"\\\\item",
+			"\\item",
+			"\\dfrac",
+			"match",
+			"]",
+			"[",
+			"},\n{",
+			", ",
+			" ,",
+			".",
+			" ,",
+			"pacman -Qo",
+			"",
+			"},\n{",
+			"}\n{",
+			", ",
+			".",
+			", ",
+			"\\\\\n",
+			"\\\\item ",
+			"\\item ",
+			"\\_",
+			"",
+			":",
+			"",
+			"update_token",
+			"",
+			",\n    ",
+			"",
+			"1",
+			"\"]",
+			"[\"",
+			"2",
+			"\"}",
+			" \"",
+			"\",",
+			"\":",
+			"{\"",
+			"\" ",
+			" \"",
+			"{\"",
+			",\n    ",
+			"\"null\"",
+			"\"True\"",
+			"/",
+			"\"True\"",
+			"\"",
+			", ",
+			"\n",
+			" ",
+			"]",
+			"[",
+			"j ",
+			" ",
+			" \n ",
+			"],\n ",
+			" ",
+			", ",
+			",\n ",
+			", 0",
+			"self.__mission",
+			"arab_num",
+			"primes",
+			"ul"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 58.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 205.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "labs.sublime-project",
+	"replace":
+	{
+		"height": 68.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 192.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
