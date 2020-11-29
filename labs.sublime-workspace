@@ -542,6 +542,7 @@
 	],
 	"file_history":
 	[
+		"/home/moxxiq/Downloads/usm_utm5.log",
 		"/home/moxxiq/KPI/Automatic testing/CALC_ACCEPTANCE/calc_acceptance_test.py",
 		"/home/moxxiq/KPI/Automatic testing/power_x_n_test.py",
 		"/home/moxxiq/.config/sublime-text-3/Packages/User/Anaconda.sublime-settings",
@@ -668,8 +669,7 @@
 		"/home/moxxiq/KPI/python/TgBotTemplate/handlers/errors/error_handler.py",
 		"/home/moxxiq/KPI/python/TgBotTemplate/keyboards/__init__.py",
 		"/home/moxxiq/KPI/python/TgBotTemplate/middlewares/throttling.py",
-		"/home/moxxiq/KPI/python/TgBotTemplate/data/config.py",
-		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/redis/consts.py"
+		"/home/moxxiq/KPI/python/TgBotTemplate/data/config.py"
 	],
 	"find":
 	{
@@ -975,8 +975,8 @@
 						"selection":
 						[
 							[
-								1393,
-								1393
+								1082,
+								1082
 							]
 						],
 						"settings":
@@ -985,8 +985,8 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 2.0,
-						"translation.y": 926.0,
+						"translation.x": 0.0,
+						"translation.y": 391.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1128,7 +1128,7 @@
 			1.0
 		]
 	},
-	"menu_visible": true,
+	"menu_visible": false,
 	"output.exec":
 	{
 		"height": 205.0
