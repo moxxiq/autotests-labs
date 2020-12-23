@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="version" content="0.0.1"/>
+        <link href="./css/index.css" rel="stylesheet" >
+        <script src="./js/quill.js"></script>       
+        <script src="./js/vue.js"></script>
+        <script src="./js/vue-quill-editor.js"></script>
+        <link href="./css/quill.snow.css" rel="stylesheet">        
+    </head>
+    <body>
+
+    <div id="app">
+        <login-panel v-bind:is-authorized="isAuthorized"></login-panel>
+        <div id="content">
+            <div id="mainbar">
+                <div id="question">
+                    <h1>{{ header }}</h1>
+                    <pre>
+    for param in ("a", "b", "c"):
+        while True:
+            try:
+                args.append(decimal.Decimal(input(f"Введіть коефіцієнт {param} = ")))
+                break
+            except decimal.InvalidOperation:
+                print("Введено некоректне значення. Спробуйте ще раз")
+
+    try:
+        res = ", ".join(str(x) for x in qe_roots(*args))
+        print(f"({res})")
+    except QERootsNoRootsException:
+        print("Рівняння не має дійсних коренів")
+    except QERootsArbitraryRootsException:
+        print("Будь-який х є коренем рівняння")
+                    </pre>
+                    <div id="comments">
+                        <ul>
+                            <comment v-for="comment in comments" v-bind:is-authorized="isAuthorized" v-bind:comment="comment" v-bind:id="comment.id"></comment>
+                        </ul>
+                        
+                        <div id="editor-section" v-if="isAuthorized">
+                          <quill-editor
+                            ref="quillEditor"
+                            class="editor"
+                            v-model="comment_editor"
+                            :options="editorOptions"
+                          ></quill-editor>
+                          <button v-on:click="newComment">New comment</button>
+                        </div>  
+                    </div>
+                </div>    
+        		<div id="answers">
+        		</div>
+                
+            </div>
+        </div>
+    </div>        
+        
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/index.js" type="module"></script>
+    
+    </body>
+</html>
