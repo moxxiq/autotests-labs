@@ -158,14 +158,24 @@ class AppTest(unittest.TestCase):
         with self.driver as driver:
             driver.get(self.START_URL)
             self._log_in(driver, email, password)
-            
+
             self.assertTrue(driver.find_elements(
                 By.XPATH, '//button[.="Log Out"]'))
             raw_text = driver.find_element(By.ID, 'signup-section').text
             self.assertEqual(
                 raw_text[:-len(self.LOGOUT_SIGNATURE)], 'Alice A.')
+            driver.find_element(By.XPATH, '//button[.="Log Out"]').click()
 
-            
+            self._log_in(driver, email, 'wrong-password')
+            elems = driver.find_elements(By.XPATH, '//button[.="Log Out"]')
+            self.assertFalse(
+                elems, 'User actually logged in with wrong password')
+
+            self._log_in(driver, 'wrong-email', password)
+            elems = driver.find_elements(By.XPATH, '//button[.="Log Out"]')
+            self.assertFalse(
+                elems, 'User actually logged in with wrong email')
+
 
 # Task 4 Log in for existing user - Alice A.
 
