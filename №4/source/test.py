@@ -35,7 +35,7 @@ class AppTest(unittest.TestCase):
         driver.find_element(By.CLASS_NAME, 'ql-editor').send_keys(text_comment)
         driver.find_element(By.XPATH, '//button[.="New comment"]').click()
 
-    def test_anonymous(self):
+    def test_1_anonymous(self):
         """
         Task 1
         """
@@ -101,64 +101,71 @@ class AppTest(unittest.TestCase):
                 By.XPATH, '//div[label[@for="psw"]/b]')
             self.assertTrue(
                 elems, 'There is no label for a Password')
-# '''
 
-    # def test_signup(self):
-    #     display_name = 'Carol C.'
-    #     email = 'carol@gmail.com'
-    #     password = 'ccc'
+    def test_2_signup(self):
+        """
+        Task 2
+        """
+        display_name = 'Carol C.'
+        email = 'carol@gmail.com'
+        password = 'ccc'
 
-    #     with self.driver as driver:
-    #         driver.get(self.START_URL)
+        with self.driver as driver:
+            driver.get(self.START_URL)
+            # a
+            # signing up
+            driver.find_element(
+                By.NAME, 'display_name').send_keys(display_name)
+            driver.find_element(By.NAME, 'email').send_keys(email)
+            driver.find_element(By.NAME, 'password').send_keys(password)
+            driver.find_element(By.XPATH, '//button[.="Sign Up"]').click()
+            # Name check
+            raw_text = driver.find_element(By.ID, 'signup-section').text
+            self.assertEqual(
+                raw_text[:-len(self.LOGOUT_SIGNATURE)], display_name)
+            # Log out usage check
+            btn = driver.find_element(By.XPATH, '//button[.="Log Out"]')
+            # b
+            btn.click()
+            elems = driver.find_elements(By.XPATH, '//button[.="Log In"]')
+            self.assertTrue(elems, 'User did not log out')
+            # c
+            other_display_name = 'Borya B.'
+            elem = driver.find_element(By.NAME, 'display_name')
+            elem.clear()
+            elem.send_keys(other_display_name)
 
-    #         driver.find_element(
-    #             By.NAME, 'display_name').send_keys(display_name)
-    #         driver.find_element(By.NAME, 'email').send_keys(email)
-    #         driver.find_element(By.NAME, 'password').send_keys(password)
-    #         driver.find_element(By.XPATH, '//button[.="Sign Up"]').click()
+            elem = driver.find_element(By.NAME, 'email')
+            elem.clear()
+            elem.send_keys(email)
 
-    #         raw_text = driver.find_element(By.ID, 'signup-section').text
-    #         self.assertEqual(
-    #             raw_text[:-len(self.LOGOUT_SIGNATURE)], display_name)
+            elem = driver.find_element(By.NAME, 'password')
+            elem.clear()
+            elem.send_keys(password)
 
-    #         driver.find_element(By.XPATH, '//button[.="Log Out"]').click()
-    #         elems = driver.find_elements(By.XPATH, '//button[.="Log In"]')
-    #         self.assertTrue(elems, 'User did not log out')
+            driver.find_element(By.XPATH, '//button[.="Sign Up"]').click()
 
-    #         other_display_name = 'Borya B.'
-    #         elem = driver.find_element(By.NAME, 'display_name')
-    #         elem.clear()
-    #         elem.send_keys(other_display_name)
-
-    #         elem = driver.find_element(By.NAME, 'email')
-    #         elem.clear()
-    #         elem.send_keys(email)
-
-    #         elem = driver.find_element(By.NAME, 'password')
-    #         elem.clear()
-    #         elem.send_keys(password)
-
-    #         driver.find_element(By.XPATH, '//button[.="Sign Up"]').click()
-
-    #         elems = driver.find_elements(By.XPATH, '//button[.="Log Out"]')
-    #         self.assertFalse(
-    #             elems, 'User actually logged in with non unique email')
+            elems = driver.find_elements(By.XPATH, '//button[.="Log Out"]')
+            self.assertFalse(
+                elems, 'User actually logged in with non unique email')
 
 # Task 3 Log in for existing user - Alice A.
 
-    # def test_log_in(self):
+    def test_3_log_in(self):
 
-    #     email, password = 'alice_2002@gmail.com', 'aaa'
+        email, password = 'alice_2002@gmail.com', 'aaa'
 
-    #     with self.driver as driver:
-    #         driver.get(self.START_URL)
-    #         self._log_in(driver, email, password)
+        with self.driver as driver:
+            driver.get(self.START_URL)
+            self._log_in(driver, email, password)
+            
+            self.assertTrue(driver.find_elements(
+                By.XPATH, '//button[.="Log Out"]'))
+            raw_text = driver.find_element(By.ID, 'signup-section').text
+            self.assertEqual(
+                raw_text[:-len(self.LOGOUT_SIGNATURE)], 'Alice A.')
 
-    #         self.assertTrue(driver.find_elements(
-    #             By.XPATH, '//button[.="Log Out"]'))
-    #         raw_text = driver.find_element(By.ID, 'signup-section').text
-    #         self.assertEqual(
-    #             raw_text[:-len(self.LOGOUT_SIGNATURE)], 'Alice A.')
+            
 
 # Task 4 Log in for existing user - Alice A.
 

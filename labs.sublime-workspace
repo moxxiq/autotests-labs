@@ -352,6 +352,15 @@
 			}
 		},
 		{
+			"file": "№4/source/test.py",
+			"settings":
+			{
+				"buffer_size": 8448,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "№4/source/test_example.py",
 			"settings":
 			{
@@ -635,7 +644,7 @@
 	],
 	"find":
 	{
-		"height": 64.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -649,6 +658,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"find",
+			"time",
 			"screenshot",
 			"# driver = webdriver.Firefox()",
 			"with driver",
@@ -774,9 +785,7 @@
 			"test_2_empty",
 			"_",
 			"(self):\n",
-			"def test_",
-			":\\n.+",
-			"escape"
+			"def test_"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -887,7 +896,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -903,8 +912,8 @@
 						"selection":
 						[
 							[
-								1165,
-								1165
+								1519,
+								1519
 							]
 						],
 						"settings":
@@ -914,7 +923,37 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 750.0,
+						"translation.y": 600.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "№4/source/test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8448,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8326,
+								8326
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4907.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -927,9 +966,9 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "№4/source/test_example.py",
-					"semi_transient": true,
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 7748,
@@ -939,8 +978,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								1241,
+								1241
 							]
 						],
 						"settings":
@@ -950,7 +989,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1125.0,
+						"translation.y": 525.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -987,7 +1026,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.643549364022,
 			1.0
 		],
 		"rows":
@@ -1013,7 +1052,7 @@
 	"project": "labs.sublime-project",
 	"replace":
 	{
-		"height": 112.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":
