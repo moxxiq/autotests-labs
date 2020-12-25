@@ -149,10 +149,10 @@ class AppTest(unittest.TestCase):
             self.assertFalse(
                 elems, 'User actually logged in with non unique email')
 
-# Task 3 Log in for existing user - Alice A.
-
     def test_3_log_in(self):
-
+        """
+        Task 3 Log in for existing user - Alice A.
+        """
         email, password = 'alice_2002@gmail.com', 'aaa'
 
         with self.driver as driver:
@@ -176,29 +176,27 @@ class AppTest(unittest.TestCase):
             self.assertFalse(
                 elems, 'User actually logged in with wrong email')
 
+    def test_4_editor(self):
+        """
+        Task 4 Log in for existing user - Alice A.
+        """
+        email, password = 'alice_2002@gmail.com', 'aaa'
+        my_script = """
+        var elem = document.getElementById('editor-section');
+        elem.style.borderColor = "red";
+        elem.style.borderStyle = "solid";
+        """
+        with self.driver as driver:
+            driver.get(self.START_URL)
+            self._log_in(driver, email, password)
 
-# Task 4 Log in for existing user - Alice A.
+            elem = driver.find_element(By.ID, 'editor-section')
+            self.assertTrue(elem, 'Editor section is not present')
+            elem = driver.find_element(By.XPATH, '//button[.="New comment"]')
+            self.assertTrue(elem, 'New comment button is missing')
 
-    # def test_editor(self):
-
-    #     email, password = 'alice_2002@gmail.com', 'aaa'
-    #     my_script = """
-    #     var elem = document.getElementById('editor-section');
-    #     elem.style.borderColor = "red";
-    #     elem.style.borderStyle = "solid";
-    #     """
-
-    #     with self.driver as driver:
-    #         driver.get(self.START_URL)
-    #         self._log_in(driver, email, password)
-
-    #         elem = driver.find_element(By.ID, 'editor-section')
-    #         self.assertTrue(elem, 'Editor section is not present')
-    #         elem = driver.find_element(By.XPATH, '//button[.="New comment"]')
-    #         self.assertTrue(elem, 'New comment button is missing')
-
-    #         driver.execute_script(my_script)
-    #         driver.save_screenshot('my_screen.png')
+            driver.execute_script(my_script)
+            driver.save_screenshot('comments_screenshot.png')
 
 
 # Test 5. Check for an existing user, for example, - Alice A.

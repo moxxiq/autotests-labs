@@ -355,7 +355,7 @@
 			"file": "№4/source/test.py",
 			"settings":
 			{
-				"buffer_size": 8448,
+				"buffer_size": 9098,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -935,15 +935,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8448,
+						"buffer_size": 9098,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8326,
-								8326
+								6694,
+								6694
 							]
 						],
 						"settings":
@@ -953,7 +953,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4907.0,
+						"translation.y": 3772.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -989,7 +989,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 525.0,
+						"translation.y": 754.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
