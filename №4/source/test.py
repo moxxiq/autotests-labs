@@ -16,7 +16,8 @@ class AppTest(unittest.TestCase):
         self.driver = webdriver.Firefox()
 
     def tearDown(self):
-        # No need to add self.driver.quit() it's already in __exit__
+        # Despite of it's already in __exit__, memory won't free ¯\_(ツ)_/¯ idk
+        self.driver.quit()
         self.backend_process.kill()
         self.backend_process.wait()
 
@@ -35,9 +36,16 @@ class AppTest(unittest.TestCase):
         driver.find_element(By.CLASS_NAME, 'ql-editor').send_keys(text_comment)
         driver.find_element(By.XPATH, '//button[.="New comment"]').click()
 
+    def _check_last_comment(self, driver, comment, author):
+        xp = f'//div[@id="comments"]/ul/li[last()][span="{comment}"]'\
+            f'[a="{author}"][span/button="Remove"]'
+        self.assertTrue(
+            driver.find_element(By.XPATH, xp),
+            'New comment is not correct')
+
     def test_1_anonymous(self):
         """
-        Task 1
+        1. Перевіряє, що анонімний користувач бачить на сторінці
         """
         with self.driver as driver:
             driver.get(self.START_URL)
@@ -104,7 +112,7 @@ class AppTest(unittest.TestCase):
 
     def test_2_signup(self):
         """
-        Task 2
+        2. Перевіряє, що новий користувач може зареєструватись
         """
         display_name = 'Carol C.'
         email = 'carol@gmail.com'
@@ -151,7 +159,7 @@ class AppTest(unittest.TestCase):
 
     def test_3_log_in(self):
         """
-        Task 3 Log in for existing user - Alice A.
+        3. Перевіряє, що зареєстрований користувач входить до свого облікового запису
         """
         email, password = 'alice_2002@gmail.com', 'aaa'
 
@@ -178,7 +186,7 @@ class AppTest(unittest.TestCase):
 
     def test_4_editor(self):
         """
-        Task 4 Log in for existing user - Alice A.
+        4. Перевіряє, що на сторінці є Редактор та кнопка New comment
         """
         email, password = 'alice_2002@gmail.com', 'aaa'
         my_script = """
@@ -198,38 +206,96 @@ class AppTest(unittest.TestCase):
             driver.execute_script(my_script)
             driver.save_screenshot('comments_screenshot.png')
 
+    def test_5_comment(self):
+        """
+        5. Перевіряє, що користувач, може ввести новий коментар
+        """
+        def click_style(style_name):
+            driver.find_element(By.CLASS_NAME, 'ql-' + style_name).click()
 
-# Test 5. Check for an existing user, for example, - Alice A.
-    # def test_comment(self):
+        name = "Alice A."
+        email, password = 'alice_2002@gmail.com', 'aaa'
+        my_comment = 'Comment from Alice'
+        expected_formatted_comment_html = '<span><strong>Comment</strong> '\
+            '<em>from <s>Alice</s></em> <u>Dmytro</u></span>'
 
-    #     def click_style(style_name):
-    #         driver.find_element(By.CLASS_NAME, 'ql-' + style_name).click()
+        with self.driver as driver:
+            driver.get(self.START_URL)
+            self._log_in(driver, email, password)
+            # a
+            self._post_comment(driver, my_comment)
+            self._check_last_comment(driver, my_comment, name)
+            # b
+            text_field = driver.find_element(By.CLASS_NAME, 'ql-editor')
+            text_field.clear()
+            click_style('bold')
+            text_field.send_keys('Comment')
+            click_style('bold')
+            text_field.send_keys(' ')
+            click_style('italic')
+            text_field.send_keys('from ')
+            click_style('strike')
+            text_field.send_keys('Alice')
+            click_style('strike')
+            click_style('italic')
+            text_field.send_keys(' ')
+            click_style('underline')
+            text_field.send_keys('Dmytro')
+            click_style('underline')
+            driver.find_element(By.XPATH, '//button[.="New comment"]').click()
 
-    #     email, password = 'alice_2002@gmail.com', 'aaa'
-    #     my_comment = 'Comment from Alice'
-    #     expected_formatted_comment_html = '<span><strong>Comment</strong> from Alice</span>'
+            elem = driver.find_element(
+                By.XPATH, '//div[@id="comments"]/ul/li[last()]/span')
+            extracted_html = elem.get_attribute('outerHTML')
+            self.assertEqual(extracted_html, expected_formatted_comment_html)
+            # c
+            self._check_last_comment(driver, "Comment from Alice Dmytro", name)
 
-    #     with self.driver as driver:
-    #         driver.get(self.START_URL)
-    #         self._log_in(driver, email, password)
+    def test_6_comment(self):
+        """
+        6. Перевіряє, що користувач, може ввести ще один коментар
+        """
+        name = "Alice A."
+        email, password = 'alice_2002@gmail.com', 'aaa'
+        comments = ('Previous Alice comment', 'Current Alice comment')
+        with self.driver as driver:
+            driver.get(self.START_URL)
+            self._log_in(driver, email, password)
+            # a
+            for comment in comments:
+                self._post_comment(driver, comment)
+                self._check_last_comment(driver, comment, name)
+            # b
+            for comment, elem in zip(
+                comments,
+                driver.find_elements(By.XPATH, '//div[@id="comments"]/ul/li[position() > (last() - 2)]')
+            ):
+                comment_text = elem.find_element(By.TAG_NAME, 'span').text
+                author = elem.find_element(By.TAG_NAME, 'a').text
+                self.assertEqual((comment, name), (comment_text, author),
+                                 'Comment does not match')
 
-    #         self._post_comment(driver, my_comment)
-    #         xp = '//div[@id="comments"]/ul/li[last()][span="{}"][a="Alice A."][span/button="Remove"]'.format(my_comment)
-    #         self.assertTrue(driver.find_element(By.XPATH, xp),
-    #                         'New comment is not correct')
+    def test_7_remove(self):
+        """
+        7. Перевіряє, що користувач може видалити створений ним коментар
+        """
+        email, password = 'alice_2002@gmail.com', 'aaa'
+        comment = 'Alice comment'
+        with self.driver as driver:
+            driver.get(self.START_URL)
+            self._log_in(driver, email, password)
+            comments_before = driver.find_elements(
+                By.XPATH,
+                '//div[@id="comments"]/ul/li')
+            self._post_comment(driver, comment)
+            driver.find_element(By.XPATH, '//div[@id="comments"]/ul/li[last()]/span/button[.="Remove"]').click()
+            comments_after = driver.find_elements(
+                By.XPATH,
+                '//div[@id="comments"]/ul/li')
+            self.assertEqual(comments_before, comments_after)
 
-    #         driver.find_element(By.CLASS_NAME, 'ql-editor').clear()
-    #         elem = driver.find_element(By.CLASS_NAME, 'ql-editor')
-    #         click_style('bold')
-    #         elem.send_keys('Comment')
-    #         click_style('bold')
-    #         elem.send_keys(' from Alice')
-    #         driver.find_element(By.XPATH, '//button[.="New comment"]').click()
-
-    #         elem = driver.find_element(
-    #             By.XPATH, '//div[@id="comments"]/ul/li[last()]/span')
-    #         extracted_html = elem.get_attribute('outerHTML')
-    #         self.assertEqual(extracted_html, expected_formatted_comment_html)
+    def test_8_multiplayer(self):
+        pass
 
 
 if __name__ == '__main__':
