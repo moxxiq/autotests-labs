@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"comm",
+				"comment_2\tabc"
+			],
+			[
+				"fin",
+				"find_element"
+			],
+			[
+				"qu",
+				"quit"
+			],
+			[
+				"com",
+				"comment2\tstatement"
+			],
+			[
+				"dri",
+				"driver_2\tabc"
+			],
+			[
+				"dr",
+				"driver_1\tabc"
+			],
+			[
+				"comments",
+				"comments_before\tabc"
+			],
+			[
+				"ass",
+				"assertEqual\tfunction"
+			],
+			[
 				"s",
 				"sleep\tfunction"
 			],
@@ -332,10 +364,6 @@
 				"binary\tabc"
 			],
 			[
-				"com",
-				"combs\tabc"
-			],
-			[
 				"ba",
 				"background-color\tproperty"
 			]
@@ -355,7 +383,7 @@
 			"file": "№4/source/test.py",
 			"settings":
 			{
-				"buffer_size": 9098,
+				"buffer_size": 15638,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -644,7 +672,7 @@
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 64.0
 	},
 	"find_in_files":
 	{
@@ -658,6 +686,34 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"comment 1 is",
+			"button",
+			"time.sleep",
+			"display_name",
+			"= (",
+			"=(",
+			"assert",
+			"assrt",
+			"sign up",
+			"sing",
+			"sing up",
+			"()\n",
+			"()",
+			"time.sleep",
+			"remove",
+			"remobe",
+			"driver.find_elements(By.XPATH, '//div[@id=\"comments\"]",
+			"/span",
+			"elem.",
+			"time",
+			"sleep",
+			"Alice A.",
+			"name",
+			"Alice A.",
+			"xp =",
+			"my_comment",
+			"\"\"\"",
+			"display Name",
 			"find",
 			"time",
 			"screenshot",
@@ -757,35 +813,7 @@
 			"creds",
 			"user_",
 			"user_creds",
-			"user_",
-			"aiogoogle",
-			"user_cre",
-			"user",
-			"user_creds",
-			"gmpart_api",
-			"__gmpart_api",
-			"gmpart_api",
-			"authoriz",
-			"user_creds",
-			"user_cr",
-			"aiogoogle",
-			"get_email_address",
-			"gmpart_api",
-			"__gmpart_api",
-			"Gmpart",
-			"gmpart_api",
-			"state",
-			"create_secret",
-			"create",
-			"au",
-			"\n",
-			"\\d+\\.",
-			"3.",
-			"\\d+\\.",
-			"test_2_empty",
-			"_",
-			"(self):\n",
-			"def test_"
+			"user_"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -923,7 +951,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 600.0,
+						"translation.y": 552.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -935,15 +963,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9098,
+						"buffer_size": 15638,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6694,
-								6694
+								14038,
+								14050
 							]
 						],
 						"settings":
@@ -953,7 +981,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3772.0,
+						"translation.y": 8505.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -978,8 +1006,8 @@
 						"selection":
 						[
 							[
-								1241,
-								1241
+								347,
+								347
 							]
 						],
 						"settings":
@@ -989,7 +1017,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 754.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1000,7 +1028,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 38.0
+		"height": 36.0
 	},
 	"input":
 	{
@@ -1052,7 +1080,7 @@
 	"project": "labs.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 68.0
 	},
 	"save_all_on_build": true,
 	"select_file":

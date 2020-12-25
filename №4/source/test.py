@@ -31,6 +31,26 @@ class AppTest(unittest.TestCase):
         elem.send_keys(password)
         driver.find_element(By.XPATH, '//button[.="Log In"]').click()
 
+    def _create_user(self, driver, name, email, password):
+        name_field = driver.find_element(By.NAME, 'display_name')
+        email_field = driver.find_element(By.NAME, 'email')
+        password_field = driver.find_element(By.NAME, 'password')
+
+        # unary clearing doesn't work in multiple sessions
+        name_field.send_keys()
+        name_field.clear()
+        name_field.send_keys(name)
+        email_field.send_keys()
+        email_field.clear()
+        email_field.send_keys(email)
+        password_field.send_keys()
+        password_field.clear()
+        password_field.send_keys(password)
+
+        driver.find_element(By.XPATH, '//button[.="Sign Up"]').click()
+        btn = driver.find_element(By.XPATH, '//button[.="Log Out"]')
+        btn.click()
+
     def _post_comment(self, driver, text_comment):
         driver.find_element(By.CLASS_NAME, 'ql-editor').clear()
         driver.find_element(By.CLASS_NAME, 'ql-editor').send_keys(text_comment)
@@ -295,7 +315,80 @@ class AppTest(unittest.TestCase):
             self.assertEqual(comments_before, comments_after)
 
     def test_8_multiplayer(self):
-        pass
+        """
+        Перевіряє, що можуть бути активними два різних користувача
+        """
+        user_1 = ('User 1', 'u1@gmail.com', 'userone')
+        user_2 = ('User 2', 'u2@gmail.com', 'usertwo')
+        # create user 1, 2
+        with webdriver.Firefox() as driver:
+            driver.get(self.START_URL)
+            self._create_user(driver, *user_1)
+            self._create_user(driver, *user_2)
+
+        with webdriver.Firefox() as driver_1, webdriver.Firefox() as driver_2:
+            driver_1.get(self.START_URL)
+            driver_2.get(self.START_URL)
+            # a
+            self._log_in(driver_1, *user_1[1:])
+            self._post_comment(driver_1, 'comment1')
+            # b
+            self._log_in(driver_2, *user_2[1:])
+            self._post_comment(driver_2, 'comment2')
+
+            comment_2 = driver_2.find_elements(
+                By.XPATH,
+                '//div[@id="comments"]/ul/li/span[.="comment2"]')
+            self.assertTrue(comment_2, 'Comment 2 is absent')
+            comment_1 = driver_2.find_elements(
+                By.XPATH,
+                '//div[@id="comments"]/ul/li/span[.="comment1"]')
+            self.assertTrue(comment_1, 'Comment 1 is absent')
+            # c
+            self._post_comment(driver_1, 'comment3')
+            self.assertTrue(
+                driver_1.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment1"]'),
+                'Comment 1 is absent')
+            self.assertTrue(
+                driver_1.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment2"]'),
+                'Comment 2 is absent')
+            self.assertTrue(
+                driver_1.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment3"]'),
+                'Comment 3 is absent')
+            # d
+            driver_2.find_element(
+                By.XPATH,
+                '//div[@id="comments"]/ul/li[span = "comment2"]/span/button[.="Remove"]'
+            ).click()
+            self.assertTrue(
+                driver_2.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment1"]'),
+                'Comment 1 is absent')
+            self.assertTrue(
+                driver_2.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment3"]'),
+                'Comment 3 is absent')
+        # e
+        with webdriver.Firefox() as driver:
+            driver.get(self.START_URL)
+            self.assertTrue(
+                driver.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li[span="comment1"]'),
+                'Comment 1 is absent')
+            self.assertTrue(
+                driver.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li[span="comment3"]'),
+                'Comment 3 is absent')
 
 
 if __name__ == '__main__':
