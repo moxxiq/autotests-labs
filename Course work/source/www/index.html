@@ -23,17 +23,7 @@
                     <div id="comments">
                         <ul>
                             <comment v-for="comment in comments" v-bind:is-authorized="isAuthorized" v-bind:comment="comment" v-bind:id="comment.id"></comment>
-                        </ul>
-                        
-                        <div id="editor-section" v-if="isAuthorized">
-                          <quill-editor
-                            ref="quillEditor"
-                            class="editor"
-                            v-model="comment_editor"
-                            :options="editorOptions"
-                          ></quill-editor>
-                          <button v-on:click="newComment">New comment</button>
-                        </div>  
+                        </ul>  
                     </div>
                 </div>    
         		<div id="answers">

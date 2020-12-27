@@ -92,9 +92,12 @@ Vue.component('task', {
     <div id="values">
       <input name="baseinput" type="text" v-on:input="baseInput"/>
     </div>
+    <button v-on:click="solve">Обчислити</button>
+    <h3>Відповідь: {{answer}}</h3>
   </div>
   <div v-else><h2>Увійдіть щоб скористатися додатком</h2>
   </div>`,
+  data: function () {return {answer: ''}},
   methods: {
     baseInput: function(e) {
       var valuesList = document.getElementById('values');
@@ -121,7 +124,27 @@ Vue.component('task', {
       } else {
         valuesList.removeChild(e.target)
       }
-    } 
+    },
+    solve: function(){
+      var user_id = this.$session.get('user_id')
+      var valuesList = document.getElementById('values');
+      var numbers = []
+      for (let i = 0; i < valuesList.childElementCount-1; i++){
+        if (!isInputNumber(valuesList.children[i].value)) {
+          this.answer = "";
+          return;
+        }
+        numbers.push(Number.parseFloat(valuesList.children[i].value));
+      }
+      this.$http.post('/api/v1/task', { 'numbers': numbers, 'user_id': user_id }).then(response => {
+          if (response.status === 200){
+            app.comments = [...response.data.comments];
+            this.answer = response.data.answer;}
+        }, function (err) {
+          console.log('Error creating comment')
+        })
+      app.fetchComments();
+    },
   },
 })
 
@@ -129,7 +152,7 @@ Vue.component('comment', {
   props: ['comment', 'isAuthorized'],
   template: `
     <li>
-      <span v-html="comment.text"></span>-<a :href="'/users/' + comment.user_id">{{comment.display_name}}</a>
+      <span v-html="comment.text"></span> — <a :href="'/users/' + comment.user_id">{{comment.display_name}}</a>
       <span v-if="isAuthorized && this.$session.get('user_id') === comment.user_id"><button v-on:click="removeComment">Remove</button></span>
     </li>`,
   methods: {removeComment: function() {this.$root.removeComment(this.comment['id']); }

@@ -125,15 +125,15 @@ class ApiTaskHandler(tornado.web.RequestHandler):
         users = self.application.users_by_id
         comments = [{'id': x.id, 'text': x.text, 'user_id': x.user_id, 'display_name': users[x.user_id].display_name}
                     for x in self.application.comments]
-
-        self.write({'comments': comments})
+        self.write({'comments': comments, 'answer': self.answer})
 
     def post(self, path):
         data = tornado.escape.json_decode(self.request.body)
-        numbers = data.get('numbers')
-        print(numbers, data['user_id'])
-        # self.application.add_comment(result, data['user_id'])
-        # self.write_comments()
+        numbers = list(filter(lambda x: x is not None, data.get('numbers')))
+        self.answer = root_mean_square(numbers)
+        text = "Input: " + str(numbers) + " Answer: " + str(self.answer)
+        self.application.add_comment(text, data['user_id'])
+        self.write_comments()
 
 
 class ApiCommentsHandler(tornado.web.RequestHandler):
@@ -141,7 +141,6 @@ class ApiCommentsHandler(tornado.web.RequestHandler):
         users = self.application.users_by_id
         comments = [{'id': x.id, 'text': x.text, 'user_id': x.user_id, 'display_name': users[x.user_id].display_name}
                     for x in self.application.comments]
-
         self.write({'comments': comments})
 
     def get(self, path):
@@ -176,6 +175,7 @@ app = TestApp([
     tornado.web.url(r"/api/v1/user/(login)$", ApiUserLoginHandler),
     tornado.web.url(r"/api/v1/user/(signup)$", ApiUserSignupHandler),
     tornado.web.url(r"/api/v1/(comments)$", ApiCommentsHandler),
+    tornado.web.url(r"/api/v1/(task)$", ApiTaskHandler),
     tornado.web.url(r"/(.*)", FileHandler),
 ])
 
