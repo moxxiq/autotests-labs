@@ -6,7 +6,20 @@ var uniqueId = function (prefix) {
 
 var uniqueCommentId = function () {
   return uniqueId('comment-') 
-};
+}
+
+var isInputNumber = function (value) {
+  var reg = /^[\+\-]?\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/;
+  return reg.test(value)
+}
+
+var markInputNumber = function (element, isValid) {
+  if (isValid) {
+    element.style.border = "1px solid grey" 
+  } else {
+    element.style.border = "2px solid red" 
+  }
+}
 
 Vue.prototype.$http = axios
 
@@ -73,6 +86,45 @@ Vue.component('login-panel', {
   },
 })
 
+Vue.component('task', {
+  props: ['isAuthorized'],
+  template: `<div v-if="isAuthorized"><h2>Введіть список значень (лише дійсті числа)</h2>
+    <div id="values">
+      <input name="baseinput" type="text" v-on:input="baseInput"/>
+    </div>
+  </div>
+  <div v-else><h2>Увійдіть щоб скористатися додатком</h2>
+  </div>`,
+  methods: {
+    baseInput: function(e) {
+      var valuesList = document.getElementById('values');
+      markInputNumber(e.target, isInputNumber(e.target.value))
+      if (valuesList.childElementCount === 1  && e.target.value) {
+        var newInput = document.createElement('input');
+        newInput.value = '';
+        newInput.type = 'text';
+        newInput.addEventListener('input', this.itemInput)
+        valuesList.appendChild(newInput);
+      }
+    },
+    itemInput: function(e) {
+      markInputNumber(e.target, isInputNumber(e.target.value))
+      var valuesList = document.getElementById('values');
+      if (e.target.value) {
+        if (valuesList.lastElementChild == e.target) {
+          var newInput = document.createElement('input');
+          newInput.value = '';
+          newInput.type = 'text';
+          newInput.addEventListener('input', this.itemInput)
+          valuesList.appendChild(newInput);
+        }
+      } else {
+        valuesList.removeChild(e.target)
+      }
+    } 
+  },
+})
+
 Vue.component('comment', {
   props: ['comment', 'isAuthorized'],
   template: `
@@ -80,8 +132,7 @@ Vue.component('comment', {
       <span v-html="comment.text"></span>-<a :href="'/users/' + comment.user_id">{{comment.display_name}}</a>
       <span v-if="isAuthorized && this.$session.get('user_id') === comment.user_id"><button v-on:click="removeComment">Remove</button></span>
     </li>`,
-  methods: {
-  	removeComment: function() {this.$root.removeComment(this.comment['id']); }
+  methods: {removeComment: function() {this.$root.removeComment(this.comment['id']); }
   },
 })
 
@@ -96,15 +147,16 @@ var app = new Vue({
     default_new_comment: default_new_comment,
     comment_editor: default_new_comment,
     isAuthorized: false,
-	editorOptions: {
-	  theme: 'snow',
-	  formats: ['bold', 'italic', 'underline', 'strike', 'color'],
-      modules: {
-        clipboard: { matchVisual: false },
-        toolbar: ['bold', 'italic', 'underline', 'strike', 'color'],
-      }
-	},    
-  	header: "Is this a good way to process input?",
+  	editorOptions: {
+  	  theme: 'snow',
+  	  formats: ['bold', 'italic', 'underline', 'strike'],
+        modules: {
+          clipboard: { matchVisual: false },
+          toolbar: ['bold', 'italic', 'underline', 'strike'],
+        }
+  	},    
+  	header: "Курсова робота",
+    question: "В одновимірному масиві, що складається з n елементів, обчислити середньоквадратичне значення елементів масиву.",
   	comments: [],
   },
   methods: {

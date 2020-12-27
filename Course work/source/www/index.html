@@ -17,23 +17,9 @@
             <div id="mainbar">
                 <div id="question">
                     <h1>{{ header }}</h1>
-                    <pre>
-    for param in ("a", "b", "c"):
-        while True:
-            try:
-                args.append(decimal.Decimal(input(f"Введіть коефіцієнт {param} = ")))
-                break
-            except decimal.InvalidOperation:
-                print("Введено некоректне значення. Спробуйте ще раз")
-
-    try:
-        res = ", ".join(str(x) for x in qe_roots(*args))
-        print(f"({res})")
-    except QERootsNoRootsException:
-        print("Рівняння не має дійсних коренів")
-    except QERootsArbitraryRootsException:
-        print("Будь-який х є коренем рівняння")
-                    </pre>
+                    <h2>{{ question }}</h2>
+                    <task v-bind:is-authorized="isAuthorized">
+                    </task>
                     <div id="comments">
                         <ul>
                             <comment v-for="comment in comments" v-bind:is-authorized="isAuthorized" v-bind:comment="comment" v-bind:id="comment.id"></comment>

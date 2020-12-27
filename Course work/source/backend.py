@@ -120,6 +120,22 @@ class ApiUserLoginHandler(tornado.web.RequestHandler):
                     'display_name': user.display_name})
 
 
+class ApiTaskHandler(tornado.web.RequestHandler):
+    def write_comments(self):
+        users = self.application.users_by_id
+        comments = [{'id': x.id, 'text': x.text, 'user_id': x.user_id, 'display_name': users[x.user_id].display_name}
+                    for x in self.application.comments]
+
+        self.write({'comments': comments})
+
+    def post(self, path):
+        data = tornado.escape.json_decode(self.request.body)
+        numbers = data.get('numbers')
+        print(numbers, data['user_id'])
+        # self.application.add_comment(result, data['user_id'])
+        # self.write_comments()
+
+
 class ApiCommentsHandler(tornado.web.RequestHandler):
     def write_comments(self):
         users = self.application.users_by_id
@@ -165,5 +181,7 @@ app = TestApp([
 
 if __name__ == '__main__':
     http_server = tornado.httpserver.HTTPServer(app)
-    http_server.listen(HTTP_PORT, address='localhost')
+    ADDRESS = 'localhost'
+    http_server.listen(HTTP_PORT, address=ADDRESS)
+    print("Host on http://" + str(ADDRESS) + ':' + str(HTTP_PORT))
     tornado.ioloop.IOLoop.instance().start()
