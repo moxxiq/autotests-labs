@@ -52,8 +52,18 @@ class AppTest(unittest.TestCase):
         btn.click()
 
     def _post_comment(self, driver, numbers):
-        pass
         # driver.find_element(By.XPATH, '//button[.="New comment"]').click()
+        for i, n in enumerate(numbers):
+            elem = driver.find_element(By.CSS_SELECTOR, f"input:nth-child({i + 1})")
+            elem.clear()
+            elem.send_keys(str(n))
+        solve = driver.find_element(By.XPATH, '//button[.="Обчислити"]')
+        solve.click()
+
+    def _check_answer(self, driver, answer):
+        elem_answer = driver.find_element(By.CSS_SELECTOR, "h3")
+        answer_in_elem = elem_answer.text[11:]
+        self.assertEqual(answer_in_elem, answer, "Answer isn't correct")
 
     def _check_last_comment(self, driver, comment, author):
         xp = f'//div[@id="comments"]/ul/li[last()][span="{comment}"]'\
@@ -223,40 +233,15 @@ class AppTest(unittest.TestCase):
         """
         name = 'Linus T.'
         email, password = 'torvalds@osdl.org', 'kernel'
-        expected_formatted_comment_html = '<span><strong>Comment</strong> '\
-            '<em>from <s>Alice</s></em> <u>Dmytro</u></span>'
-
+        numbers = [3, 13, 33, 87]
+        my_comment = "Input: [3, 13, 33, 87] Answer: 47.0"
         with self.driver as driver:
             driver.get(self.START_URL)
             self._log_in(driver, email, password)
             # a
-            self._post_comment(driver, my_comment)
+            self._post_comment(driver, numbers)
+            self._check_answer(driver, "47")
             self._check_last_comment(driver, my_comment, name)
-            # b
-            text_field = driver.find_element(By.CLASS_NAME, 'ql-editor')
-            text_field.clear()
-            click_style('bold')
-            text_field.send_keys('Comment')
-            click_style('bold')
-            text_field.send_keys(' ')
-            click_style('italic')
-            text_field.send_keys('from ')
-            click_style('strike')
-            text_field.send_keys('Alice')
-            click_style('strike')
-            click_style('italic')
-            text_field.send_keys(' ')
-            click_style('underline')
-            text_field.send_keys('Dmytro')
-            click_style('underline')
-            driver.find_element(By.XPATH, '//button[.="New comment"]').click()
-
-            elem = driver.find_element(
-                By.XPATH, '//div[@id="comments"]/ul/li[last()]/span')
-            extracted_html = elem.get_attribute('outerHTML')
-            self.assertEqual(extracted_html, expected_formatted_comment_html)
-            # c
-            self._check_last_comment(driver, "Comment from Alice Dmytro", name)
 
     def test_6_comment(self):
         """
