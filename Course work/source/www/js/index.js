@@ -129,6 +129,7 @@ Vue.component('task', {
     },
     solve: function(){
       var user_id = this.$session.get('user_id')
+      var jwt = this.$session.get('jwt')
       var valuesList = document.getElementById('values');
       var numbers = []
       for (let i = 0; i < valuesList.childElementCount-1; i++){
@@ -138,7 +139,7 @@ Vue.component('task', {
         }
         numbers.push(Number.parseFloat(valuesList.children[i].value));
       }
-      this.$http.post('/api/v1/task', { 'numbers': numbers, 'user_id': user_id }).then(response => {
+      app.$http.post('/api/v1/task', { 'numbers': numbers, 'user_id': user_id, 'token':jwt}).then(response => {
           if (response.status === 200){
             app.comments = [...response.data.comments];
             this.answer = response.data.answer;}

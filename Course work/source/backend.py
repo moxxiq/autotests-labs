@@ -56,8 +56,13 @@ class TestApp(tornado.web.Application):
         self.comments = []
 
         test_users = (
-            ('Alice A.', 'alice_2002@gmail.com', 'aaa'),
-            ('Bob B.', 'bob_2001@gmail.com', 'bbb'),
+            ('Linus T.', 'torvalds@osdl.org', 'kernel'),
+            ('Iryna K.', 'kostushkoia5@gmail.com', 'numericalerror'),
+        )
+
+        test_commentaries = (
+            "Input: [2, 4, 16, 256] Answer: 128.2692480682724",
+            "Input: [1, -1, 4, -4] Answer: 2.9154759474226504",
         )
 
         self.users_by_id = {}
@@ -66,10 +71,11 @@ class TestApp(tornado.web.Application):
         for display_name, email, password in test_users:
             self.add_user(display_name, email).make_hash(password)
 
-        for idx, (user_id, user) in enumerate(self.users_by_id.items()):
-            self.add_comment('Test comment {}'.format(idx + 1), user.id)
+        for comm, (user_id, user) in zip(test_commentaries, self.users_by_id.items()):
+            self.add_comment(comm, user.id)
 
         self.sessions = {}
+        self.token_by_id = {}
 
     def add_user(self, display_name, email):
         user = User(self._next_user_id, display_name, email)
@@ -102,8 +108,9 @@ class ApiUserSignupHandler(tornado.web.RequestHandler):
             user = self.application.add_user(
                 data['display_name'], data['email'])
             user.make_hash(data['password'])
-
-        self.write({'token': str(uuid.uuid4()), 'user_id': user.id,
+        token = str(uuid.uuid4())
+        self.application.token_by_id.update({user.id: token})
+        self.write({'token': token, 'user_id': user.id,
                     'display_name': user.display_name})
 
 
@@ -115,8 +122,9 @@ class ApiUserLoginHandler(tornado.web.RequestHandler):
 
         if not user or not user.test_password(data.get('password', '')):
             raise tornado.web.HTTPError(status_code=403)
-
-        self.write({'token': str(uuid.uuid4()), 'user_id': user.id,
+        token = str(uuid.uuid4())
+        self.application.token_by_id.update({user.id: token})
+        self.write({'token': token, 'user_id': user.id,
                     'display_name': user.display_name})
 
 
@@ -129,6 +137,8 @@ class ApiTaskHandler(tornado.web.RequestHandler):
 
     def post(self, path):
         data = tornado.escape.json_decode(self.request.body)
+        if self.application.token_by_id.get(data['user_id']) != data['token']:
+            raise tornado.web.HTTPError(status_code=401)
         numbers = list(filter(lambda x: x is not None, data.get('numbers')))
         self.answer = root_mean_square(numbers)
         text = "Input: " + str(numbers) + " Answer: " + str(self.answer)
@@ -146,10 +156,10 @@ class ApiCommentsHandler(tornado.web.RequestHandler):
     def get(self, path):
         self.write_comments()
 
-    def post(self, path):
-        data = tornado.escape.json_decode(self.request.body)
-        self.application.add_comment(data['text'], data['user_id'])
-        self.write_comments()
+    # def post(self, path):
+    #     data = tornado.escape.json_decode(self.request.body)
+    #     self.application.add_comment(data['text'], data['user_id'])
+    #     self.write_comments()
 
     def delete(self, path):
         data = tornado.escape.json_decode(self.request.body)
