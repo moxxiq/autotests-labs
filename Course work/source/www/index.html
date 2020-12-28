@@ -7,7 +7,8 @@
         <script src="./js/quill.js"></script>       
         <script src="./js/vue.js"></script>
         <script src="./js/vue-quill-editor.js"></script>
-        <link href="./css/quill.snow.css" rel="stylesheet">        
+        <link href="./css/quill.snow.css" rel="stylesheet">
+        <title>Курсова робота</title>
     </head>
     <body>
 
@@ -23,9 +24,9 @@
                     <div id="comments">
                         <ul>
                             <comment v-for="comment in comments" v-bind:is-authorized="isAuthorized" v-bind:comment="comment" v-bind:id="comment.id"></comment>
-                        </ul>  
+                        </ul>
                     </div>
-                </div>    
+                </div>
         		<div id="answers">
         		</div>
                 

@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"user",
+				"user_id\tabc"
+			],
+			[
+				"comm",
+				"comments\tstatement"
+			],
+			[
+				"com",
+				"comment\tabc"
+			],
+			[
+				"get_",
+				"get_jwt\tabc"
+			],
+			[
+				"set",
+				"set_jwt\tabc"
+			],
+			[
 				"we",
 				"webdriver\tabc"
 			],
@@ -64,20 +84,12 @@
 				"assertRaises\tfunction"
 			],
 			[
-				"comm",
-				"comment_2\tabc"
-			],
-			[
 				"fin",
 				"find_element"
 			],
 			[
 				"qu",
 				"quit"
-			],
-			[
-				"com",
-				"comment2\tstatement"
 			],
 			[
 				"dri",
@@ -388,10 +400,6 @@
 				"gmpart\t(__init__.py)"
 			],
 			[
-				"user",
-				"user_creds\tabc"
-			],
-			[
 				"gmpar",
 				"gmpart_api\tabc"
 			],
@@ -419,7 +427,7 @@
 			"file": "Course work/source/www/js/index.js",
 			"settings":
 			{
-				"buffer_size": 7701,
+				"buffer_size": 7884,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -436,28 +444,37 @@
 			"file": "Course work/source/test__2.py",
 			"settings":
 			{
+				"buffer_size": 2052,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Course work/source/test_2.py",
+			"settings":
+			{
 				"buffer_size": 2131,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
+			"contents": "import hashlib\nimport os.path\nfrom mimetypes import guess_type\nimport tornado.escape\nimport tornado.web\nimport tornado.httpserver\nimport uuid\nfrom math import sqrt\n\n__version__ = '0.0.1'\n\nHTTP_PORT = 8000\nBASEDIR_NAME = os.path.dirname(__file__)\nBASEDIR_PATH = os.path.abspath(BASEDIR_NAME)\n\nFILES_ROOT = os.path.join(BASEDIR_PATH, 'www')\n\n\ndef root_mean_square(arr):\n    arr = list(filter(lambda x: x is not None, arr))\n    return sqrt(sum(map(lambda x: x * x, arr)) / len(arr)) if len(arr) else None\n\nclass User(object):\n\n    def __init__(self, user_id, display_name, email, sha_hash=None):\n        self.id = user_id\n        self.display_name = display_name\n        self.email = email\n        self.sha_hash = sha_hash\n\n    def _make_hash(self, password_plain):\n        hasher = hashlib.sha256()\n        hasher.update(password_plain.encode('utf-8'))\n        return hasher.digest()\n\n    def make_hash(self, password_plain):\n        self.sha_hash = self._make_hash(password_plain)\n\n    def test_password(self, password_plain):\n        return self.sha_hash == self._make_hash(password_plain)\n\nclass Comment(object):\n\n    def __init__(self, comment_id, text, user_id):\n        self.id = comment_id\n        self.text = text\n        self.user_id = user_id\n\nclass TestApp(tornado.web.Application):\n\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n\n        self._next_comment_id = 1\n        self._next_user_id = 1\n        self.comments = []\n\n        test_users = (\n            ('Linus T.', 'torvalds@osdl.org', 'kernel'),\n            ('Iryna K.', 'kostushkoia5@gmail.com', 'numericalerror'),\n        )\n\n        test_commentaries = (\n            \"Input: [2, 4, 16, 256] Answer: 128.2692480682724\",\n            \"Input: [1, -1, 4, -4] Answer: 2.9154759474226504\",\n        )\n\n        self.users_by_id = {}\n        self.users_by_email = {}\n\n        for display_name, email, password in test_users:\n            self.add_user(display_name, email).make_hash(password)\n\n        for comm, (user_id, user) in zip(test_commentaries, self.users_by_id.items()):\n            self.add_comment(comm, user.id)\n\n        self.sessions = {}\n        self.token_by_id = {}\n\n    def add_user(self, display_name, email):\n        user = User(self._next_user_id, display_name, email)\n        self.users_by_id[self._next_user_id] = user\n        self.users_by_email[email] = user\n        self._next_user_id += 1\n        return user\n\n    def add_comment(self, text, user_id):\n        new_comment = Comment(self._next_comment_id, text, user_id)\n        self.comments.append(new_comment)\n        self._next_comment_id += 1\n\n    def set_jwt(self, user_id, token):\n        self.token_by_id.update({user_id: token})\n\n    def get_jwt(self, user_id):\n        return self.token_by_id.get(user_id)\n\n    def is_users_comment(self, comment_id, user_id):\n        for comment in self.comments:\n            if comment.id == comment_id:\n                return comment.user_id == user_id\n                break\n\n    def remove_comment(self, comment_id):\n        for idx, comment in enumerate(self.comments):\n            if comment.id == comment_id:\n                del self.comments[idx]\n                break\n\n\nclass ApiUserSignupHandler(tornado.web.RequestHandler):\n\n    def post(self, path):\n        data = tornado.escape.json_decode(self.request.body)\n        user = self.application.users_by_email.get(data['email'])\n\n        if user or not data['email'] or not data['display_name'] or not data['password']:\n            raise tornado.web.HTTPError(status_code=500)\n        else:\n            user = self.application.add_user(\n                data['display_name'], data['email'])\n            user.make_hash(data['password'])\n        token = str(uuid.uuid4())\n        self.application.set_jwt(user.id, token)\n        self.write({'token': token, 'user_id': user.id,\n                    'display_name': user.display_name})\n\n\nclass ApiUserLoginHandler(tornado.web.RequestHandler):\n\n    def post(self, path):\n        data = tornado.escape.json_decode(self.request.body)\n        user = self.application.users_by_email.get(data['email'])\n\n        if not user or not user.test_password(data.get('password', '')):\n            raise tornado.web.HTTPError(status_code=403)\n        token = str(uuid.uuid4())\n        self.application.set_jwt(user.id, token)\n        self.write({'token': token, 'user_id': user.id,\n                    'display_name': user.display_name})\n\n\nclass ApiTaskHandler(tornado.web.RequestHandler):\n    def write_comments(self):\n        users = self.application.users_by_id\n        comments = [{'id': x.id, 'text': x.text, 'user_id': x.user_id, 'display_name': users[x.user_id].display_name}\n                    for x in self.application.comments]\n        self.write({'comments': comments, 'answer': self.answer})\n\n    def post(self, path):\n        data = tornado.escape.json_decode(self.request.body)\n        if self.get_cookie('jwt') != self.application.get_jwt(data['user_id']):\n            raise tornado.web.HTTPError(status_code=401)\n        numbers = list(filter(lambda x: x is not None, data.get('numbers')))\n        self.answer = root_mean_square(numbers)\n        text = \"Input: \" + str(numbers) + \" Answer: \" + str(self.answer)\n        self.application.add_comment(text, data['user_id'])\n        self.write_comments()\n\n\nclass ApiCommentsHandler(tornado.web.RequestHandler):\n    def write_comments(self):\n        users = self.application.users_by_id\n        comments = [{'id': x.id, 'text': x.text, 'user_id': x.user_id, 'display_name': users[x.user_id].display_name}\n                    for x in self.application.comments]\n        self.write({'comments': comments})\n\n    def get(self, path):\n        self.write_comments()\n\n    # def post(self, path):\n    #     data = tornado.escape.json_decode(self.request.body)\n    #     self.application.add_comment(data['text'], data['user_id'])\n    #     self.write_comments()\n\n    def delete(self, path):\n        data = tornado.escape.json_decode(self.request.body)\n        if self.application.is_users_comment(data['id'], data['user_id']) and (self.get_cookie('jwt') == self.application.get_jwt(data['user_id'])):\n            self.application.remove_comment(data['id'])\n            self.write_comments()\n        else:\n            raise tornado.web.HTTPError(status_code=403)\n\n\nclass FileHandler(tornado.web.RequestHandler):\n\n    def get(self, path):\n        if not path:\n            path = 'index.html'\n        file_location = os.path.join(FILES_ROOT, path)\n        if not os.path.isfile(file_location):\n            raise tornado.web.HTTPError(status_code=404)\n        content_type, _ = guess_type(file_location)\n        self.set_header('Content-Type', content_type)\n        with open(file_location, 'rb') as source_file:\n            self.write(source_file.read())\n\n\napp = TestApp([\n    tornado.web.url(r\"/api/v1/user/(login)$\", ApiUserLoginHandler),\n    tornado.web.url(r\"/api/v1/user/(signup)$\", ApiUserSignupHandler),\n    tornado.web.url(r\"/api/v1/(comments)$\", ApiCommentsHandler),\n    tornado.web.url(r\"/api/v1/(task)$\", ApiTaskHandler),\n    tornado.web.url(r\"/(.*)\", FileHandler),\n])\n\nif __name__ == '__main__':\n    http_server = tornado.httpserver.HTTPServer(app)\n    ADDRESS = 'localhost'\n    http_server.listen(HTTP_PORT, address=ADDRESS)\n    print(\"Host on http://\" + str(ADDRESS) + ':' + str(HTTP_PORT))\n    tornado.ioloop.IOLoop.instance().start()\n",
 			"file": "Course work/source/backend.py",
+			"file_size": 7598,
+			"file_write_time": 132536337226108135,
 			"settings":
 			{
-				"buffer_size": 6828,
+				"buffer_size": 7404,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n        <meta name=\"version\" content=\"0.0.1\"/>\n        <link href=\"./css/index.css\" rel=\"stylesheet\" >\n        <script src=\"./js/quill.js\"></script>       \n        <script src=\"./js/vue.js\"></script>\n        <script src=\"./js/vue-quill-editor.js\"></script>\n        <link href=\"./css/quill.snow.css\" rel=\"stylesheet\">\n    </head>\n    <body>\n\n    <div id=\"app\">\n        <login-panel v-bind:is-authorized=\"isAuthorized\"></login-panel>\n        <div id=\"content\">\n            <div id=\"mainbar\">\n                <div id=\"question\">\n                    <h1>{{ header }}</h1>\n                    <h2>{{ question }}</h2>\n                    <task v-bind:is-authorized=\"isAuthorized\">\n                    </task>\n                    <div id=\"comments\">\n                        <ul>\n                            <comment v-for=\"comment in comments\" v-bind:is-authorized=\"isAuthorized\" v-bind:comment=\"comment\" v-bind:id=\"comment.id\"></comment>\n                        </ul>\n                    </div>\n                </div>\n        \t\t<div id=\"answers\">\n        \t\t</div>\n                \n            </div>\n        </div>\n    </div>        \n        \n    <script src=\"./js/axios.min.js\"></script>\n    <script src=\"./js/index.js\" type=\"module\"></script>\n    \n    </body>\n</html>",
 			"file": "Course work/source/www/index.html",
-			"file_size": 1342,
-			"file_write_time": 132535822038796111,
 			"settings":
 			{
-				"buffer_size": 1328,
+				"buffer_size": 1366,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -614,7 +631,10 @@
 	[
 		"/home/moxxiq/KPI/Automatic testing/Labs",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work",
-		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source"
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source",
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www",
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/js",
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/js/vue-session"
 	],
 	"file_history":
 	[
@@ -763,6 +783,52 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"START_URL",
+			"BACKEND_NAME",
+			"data: {",
+			"print",
+			"remove",
+			"401",
+			"403",
+			"is_users_comment",
+			"remove_comment",
+			"data['u",
+			"remove_comment",
+			"add_comment",
+			"comment",
+			"self.comments",
+			"token",
+			"get",
+			"token",
+			"toket",
+			"jwt",
+			"console.",
+			"jwt",
+			"signup",
+			"cook",
+			"token",
+			"cookies",
+			"console.lo",
+			"print",
+			"cookie",
+			"token",
+			"post",
+			"jwt",
+			"Session",
+			"VueSession",
+			"session",
+			"jwt",
+			"http",
+			"axios",
+			"withCredentials",
+			"cook",
+			"session",
+			"cookie",
+			"this.$session",
+			"session",
+			"cooki",
+			"probl",
+			"self.",
 			"BASE_URL",
 			"backen",
 			"baskend",
@@ -844,53 +910,7 @@
 			"sign up",
 			"sing",
 			"sing up",
-			"()\n",
-			"()",
-			"time.sleep",
-			"remove",
-			"remobe",
-			"driver.find_elements(By.XPATH, '//div[@id=\"comments\"]",
-			"/span",
-			"elem.",
-			"time",
-			"sleep",
-			"Alice A.",
-			"name",
-			"Alice A.",
-			"xp =",
-			"my_comment",
-			"\"\"\"",
-			"display Name",
-			"find",
-			"time",
-			"screenshot",
-			"# driver = webdriver.Firefox()",
-			"with driver",
-			"\n    ",
-			"self.driver as driver",
-			"quit",
-			"quir",
-			"ActionChains",
-			"with driver",
-			"driver = webdriver.Firefox()",
-			"ERROR",
-			"tornado.access:500",
-			"sleep",
-			"wait",
-			"webdriver.Chrome",
-			"with driver",
-			"chrome",
-			"chromedriv",
-			"self.write",
-			"self.comments",
-			"time",
-			"run",
-			"run_",
-			"run_te",
-			"pytest",
-			"HTTP_PORT",
-			"   ",
-			","
+			"()\n"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1011,15 +1031,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7701,
+						"buffer_size": 7884,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4315,
-								4315
+								6616,
+								6616
 							]
 						],
 						"settings":
@@ -1028,8 +1048,8 @@
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 150.0,
-						"translation.y": 2735.0,
+						"translation.x": 0.0,
+						"translation.y": 917.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -1062,12 +1082,42 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
 					"file": "Course work/source/test__2.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2052,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								216,
+								216
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Course work/source/test_2.py",
 					"semi_transient": false,
 					"settings":
 					{
@@ -1078,8 +1128,8 @@
 						"selection":
 						[
 							[
-								1874,
-								1874
+								361,
+								361
 							]
 						],
 						"settings":
@@ -1089,33 +1139,33 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 450.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "Course work/source/backend.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6828,
+						"buffer_size": 7404,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4842,
-								4842
+								7161,
+								7161
 							]
 						],
 						"settings":
@@ -1125,27 +1175,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3087.0,
+						"translation.y": 4498.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "Course work/source/www/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1328,
+						"buffer_size": 1366,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								405,
-								405
+								805,
+								805
 							]
 						],
 						"settings":
@@ -1155,14 +1205,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 75.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "/home/moxxiq/KPI/Automatic testing/testapp_http.py",
 					"semi_transient": false,
 					"settings":
@@ -1174,8 +1224,8 @@
 						"selection":
 						[
 							[
-								1827,
-								1827
+								400,
+								400
 							]
 						],
 						"settings":
@@ -1185,10 +1235,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 750.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1248,7 +1298,7 @@
 	"project": "labs.sublime-project",
 	"replace":
 	{
-		"height": 112.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1278,7 +1328,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

@@ -1,7 +1,8 @@
-from subprocess import Popen
+from subprocess import Popen, PIPE
 import unittest
 import requests
 import pprint
+from time import sleep
 
 
 class AppTest(unittest.TestCase):
@@ -9,13 +10,13 @@ class AppTest(unittest.TestCase):
     START_URL = 'http://localhost:8000'
     LOGOUT_SIGNATURE = 'Log Out'
 
-    TEST_USERS = (
-        ('Linus T.', 'torvalds@osdl.org', 'kernel'),
-        ('Iryna K.', 'kostushkoia5@gmail.com', 'numericalerror'),
-    )
+    Linus = ('Linus T.', 'torvalds@osdl.org', 'kernel'),
+    Iryna = ('Iryna K.', 'kostushkoia5@gmail.com', 'numericalerror')
 
     def setUp(self):
-        self.backend_process = Popen(['python', self.BACKEND_NAME])
+        self.backend_process = Popen(
+            ['python', self.BACKEND_NAME],)
+        sleep(2)
 
     def tearDown(self):
         # Despite of it's already in __exit__, memory won't free ¯\_(ツ)_/¯ idk
@@ -23,18 +24,18 @@ class AppTest(unittest.TestCase):
         self.backend_process.wait()
 
     def test_login(self):
-        test_user_1 = self.TEST_USERS[0]
-        input_data = {'email': test_user_1[1], 'password': test_user_1[2]}
+        input_data = {'email': self.Linus[1], 'password': self.Linus[2]}
 
         response = requests.post(
             self.START_URL + '/api/v1/user/login', json=input_data)
         self.assertTrue(response.status_code == 200)
 
         result = response.json()
-        self.assertEqual(result['display_name'], test_user_1[0])
+        self.assertEqual(result['display_name'], self.Linus[0])
         self.assertIn('token', result)
         self.assertIn('user_id', result)
 
+    def test_wrong_login():
         input_data = {'email': test_user_1[1], 'password': 'incorrect password'}
         r = requests.post(
             self.START_URL + '/api/v1/user/login', json=input_data)
@@ -58,4 +59,4 @@ class AppTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(warnings="ignore")

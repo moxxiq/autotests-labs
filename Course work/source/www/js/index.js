@@ -1,4 +1,5 @@
 import VueSession from './vue-session/index.esm.js';
+// import VueCookies from './vue-cookies/vue-cookies.esm.js';
 
 var uniqueId = function (prefix) {
   return prefix + Math.random().toFixed(13).replace(/^0\./, '')
@@ -68,16 +69,25 @@ Vue.component('login-panel', {
             }
           }, function (err) {
             console.log('Signup error')
-          })      
+          })
     },
     logOut: function () {
-      this.$session.destroy();
-      this.$root.isAuthorized = false;
+      this.$http.post('/api/v1/user/logout', {
+        id: this.$session.get('user_id')
+      }, { withCredentials: true }).then(response => {
+        if (response.status === 200) {
+          this.$session.destroy();
+          this.$root.isAuthorized = false;
+          document.cookie = "jwt=";
+        }
+      }, function (err) {
+        console.log('Logout error')
+      })
     },
     initSession: function(response) {
       console.log(this);
       this.$session.start()
-      this.$session.set('jwt', response.data.token)
+      document.cookie = "jwt="+response.data.token
       this.$session.set('email', this.email)              
       this.$session.set('user_id', response.data.user_id)              
       this.$session.start();      
@@ -129,7 +139,6 @@ Vue.component('task', {
     },
     solve: function(){
       var user_id = this.$session.get('user_id')
-      var jwt = this.$session.get('jwt')
       var valuesList = document.getElementById('values');
       var numbers = []
       for (let i = 0; i < valuesList.childElementCount-1; i++){
@@ -139,7 +148,7 @@ Vue.component('task', {
         }
         numbers.push(Number.parseFloat(valuesList.children[i].value));
       }
-      app.$http.post('/api/v1/task', { 'numbers': numbers, 'user_id': user_id, 'token':jwt}).then(response => {
+      app.$http.post('/api/v1/task', { 'numbers': numbers, 'user_id': user_id}, { withCredentials: true }).then(response => {
           if (response.status === 200){
             app.comments = [...response.data.comments];
             this.answer = response.data.answer;}
@@ -163,6 +172,7 @@ Vue.component('comment', {
 })
 
 Vue.use(VueSession)
+// Vue.use(VueCookies)
 Vue.use(VueQuillEditor)
 
 var default_new_comment = "(enter new comment)";
@@ -187,7 +197,8 @@ var app = new Vue({
   },
   methods: {
     removeComment: function (comment_id) {
-      axios.delete('/api/v1/comments',  { data: {'id': comment_id } }).then(response => {
+      var user_id = this.$session.get('user_id')
+      this.$http.delete('/api/v1/comments',  { data: {'id': comment_id, 'user_id': user_id}}, { withCredentials: true }).then(response => {
           if (response.status === 200) {
             this.comments = [...response.data.comments]
           }
@@ -202,7 +213,7 @@ var app = new Vue({
       if (text === this.default_new_comment)
         return;
       
-      this.$http.post('/api/v1/comments', { 'text': text, 'user_id': user_id }).then(response => {
+      this.$http.post('/api/v1/comments', { 'text': text, 'user_id': user_id }, { withCredentials: true }).then(response => {
           if (response.status === 200)
             this.comments = [...response.data.comments]
         }, function (err) {

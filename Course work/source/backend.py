@@ -89,6 +89,21 @@ class TestApp(tornado.web.Application):
         self.comments.append(new_comment)
         self._next_comment_id += 1
 
+    def set_jwt(self, user_id, token):
+        self.token_by_id.update({user_id: token})
+
+    def get_jwt(self, user_id):
+        return self.token_by_id.get(user_id)
+
+    def del_jwt(self, user_id):
+        del self.token_by_id[user_id]
+
+    def is_users_comment(self, comment_id, user_id):
+        for comment in self.comments:
+            if comment.id == comment_id:
+                return comment.user_id == user_id
+                break
+
     def remove_comment(self, comment_id):
         for idx, comment in enumerate(self.comments):
             if comment.id == comment_id:
@@ -109,7 +124,7 @@ class ApiUserSignupHandler(tornado.web.RequestHandler):
                 data['display_name'], data['email'])
             user.make_hash(data['password'])
         token = str(uuid.uuid4())
-        self.application.token_by_id.update({user.id: token})
+        self.application.set_jwt(user.id, token)
         self.write({'token': token, 'user_id': user.id,
                     'display_name': user.display_name})
 
@@ -123,9 +138,22 @@ class ApiUserLoginHandler(tornado.web.RequestHandler):
         if not user or not user.test_password(data.get('password', '')):
             raise tornado.web.HTTPError(status_code=403)
         token = str(uuid.uuid4())
-        self.application.token_by_id.update({user.id: token})
+        self.application.set_jwt(user.id, token)
         self.write({'token': token, 'user_id': user.id,
                     'display_name': user.display_name})
+
+
+class ApiUserLogoutHandler(tornado.web.RequestHandler):
+    def post(self, path):
+        data = tornado.escape.json_decode(self.request.body)
+        user = self.application.users_by_id.get(data['id'])
+        if self.get_cookie('jwt') != self.application.get_jwt(data['id']):
+            raise tornado.web.HTTPError(status_code=401)
+        if not user:
+            raise tornado.web.HTTPError(status_code=403)
+        if self.application.get_jwt(data['id']) == self.get_cookie('jwt'):
+            self.application.del_jwt(data['id'])
+            self.write("OK")
 
 
 class ApiTaskHandler(tornado.web.RequestHandler):
@@ -137,7 +165,7 @@ class ApiTaskHandler(tornado.web.RequestHandler):
 
     def post(self, path):
         data = tornado.escape.json_decode(self.request.body)
-        if self.application.token_by_id.get(data['user_id']) != data['token']:
+        if self.get_cookie('jwt') != self.application.get_jwt(data['user_id']):
             raise tornado.web.HTTPError(status_code=401)
         numbers = list(filter(lambda x: x is not None, data.get('numbers')))
         self.answer = root_mean_square(numbers)
@@ -163,8 +191,11 @@ class ApiCommentsHandler(tornado.web.RequestHandler):
 
     def delete(self, path):
         data = tornado.escape.json_decode(self.request.body)
-        self.application.remove_comment(data['id'])
-        self.write_comments()
+        if self.application.is_users_comment(data['id'], data['user_id']) and (self.get_cookie('jwt') == self.application.get_jwt(data['user_id'])):
+            self.application.remove_comment(data['id'])
+            self.write_comments()
+        else:
+            raise tornado.web.HTTPError(status_code=403)
 
 
 class FileHandler(tornado.web.RequestHandler):
@@ -183,6 +214,7 @@ class FileHandler(tornado.web.RequestHandler):
 
 app = TestApp([
     tornado.web.url(r"/api/v1/user/(login)$", ApiUserLoginHandler),
+    tornado.web.url(r"/api/v1/user/(logout)$", ApiUserLogoutHandler),
     tornado.web.url(r"/api/v1/user/(signup)$", ApiUserSignupHandler),
     tornado.web.url(r"/api/v1/(comments)$", ApiCommentsHandler),
     tornado.web.url(r"/api/v1/(task)$", ApiTaskHandler),
@@ -193,5 +225,5 @@ if __name__ == '__main__':
     http_server = tornado.httpserver.HTTPServer(app)
     ADDRESS = 'localhost'
     http_server.listen(HTTP_PORT, address=ADDRESS)
-    print("Host on http://" + str(ADDRESS) + ':' + str(HTTP_PORT))
+    # print("Host on http://" + str(ADDRESS) + ':' + str(HTTP_PORT))
     tornado.ioloop.IOLoop.instance().start()
