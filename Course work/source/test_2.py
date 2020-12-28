@@ -24,6 +24,9 @@ class AppTest(unittest.TestCase):
         self.backend_process.wait()
 
     def test_login(self):
+        """
+        Вхід зареєстрованого користувача
+        """
         input_data = {'email': self.Linus[1], 'password': self.Linus[2]}
 
         response = requests.post(
@@ -36,18 +39,27 @@ class AppTest(unittest.TestCase):
         self.assertIn('user_id', result)
 
     def test_wrong_pass(self):
+        """
+        Вхід з невірним паролем
+        """
         input_data = {'email': self.Linus[1], 'password': 'incorrect password'}
         response = requests.post(
             self.START_URL + '/api/v1/user/login', json=input_data)
         self.assertEqual(response.status_code, 403)
 
     def test_wrong_login(self):
+        """
+        Вхід з невірним логіном
+        """
         input_data = {'email': 'incorrect email', 'password': self.Linus[1]}
         response = requests.post(
             self.START_URL + '/api/v1/user/login', json=input_data)
         self.assertEqual(response.status_code, 403)
 
     def test_unauthorized_comment(self):
+        """
+        Створення коментаря в обхід входу
+        """
         # Let's just assume we know that test Bob's user id is 2.
         required_cookies = {'jwt': 'definitely incorrect security token'}
         data = {'user_id': 2,
@@ -59,6 +71,9 @@ class AppTest(unittest.TestCase):
             response.status_code, 401, 'Unauthorized request to add comment has actually succeeded')
 
     def test_logout(self):
+        """
+        Вихід з облікового запису
+        """
         # login
         input_data = {'email': self.Linus[1], 'password': self.Linus[2]}
         response = requests.post(
@@ -74,6 +89,9 @@ class AppTest(unittest.TestCase):
             r.status_code, 200, "User can't log out")
 
     def test_authorized_comment(self):
+        """
+        Вирішення задачі з вхідними данними і створення коментаря
+        """
         # login
         input_data = {'email': self.Linus[1], 'password': self.Linus[2]}
         response = requests.post(
@@ -111,6 +129,9 @@ class AppTest(unittest.TestCase):
             r.json(), expected, "Can't post comments")
 
     def test_singin(self):
+        """
+        Реєстрація нового користувача
+        """
         input_data = {"display_name": "Dmytro",
                       "password": "dima",
                       "email": "dimanavsisto@gmail.com"}
@@ -125,6 +146,9 @@ class AppTest(unittest.TestCase):
             result["display_name"], expected["display_name"], "User can't signin")
 
     def test_singin_existing(self):
+        """
+        Реєстрація існуючого користувача
+        """
         input_data = {
             "display_name": self.Linus[0],
             "password": self.Linus[2],
