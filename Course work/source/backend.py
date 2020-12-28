@@ -118,7 +118,7 @@ class ApiUserSignupHandler(tornado.web.RequestHandler):
         user = self.application.users_by_email.get(data['email'])
 
         if user or not data['email'] or not data['display_name'] or not data['password']:
-            raise tornado.web.HTTPError(status_code=500)
+            raise tornado.web.HTTPError(status_code=409)
         else:
             user = self.application.add_user(
                 data['display_name'], data['email'])
@@ -146,11 +146,11 @@ class ApiUserLoginHandler(tornado.web.RequestHandler):
 class ApiUserLogoutHandler(tornado.web.RequestHandler):
     def post(self, path):
         data = tornado.escape.json_decode(self.request.body)
-        user = self.application.users_by_id.get(data['id'])
-        if self.get_cookie('jwt') != self.application.get_jwt(data['id']):
-            raise tornado.web.HTTPError(status_code=401)
-        if not user:
-            raise tornado.web.HTTPError(status_code=403)
+        # user = self.application.users_by_id.get(data['id'])
+        # if self.get_cookie('jwt') != self.application.get_jwt(data['id']):
+        #     raise tornado.web.HTTPError(status_code=401)
+        # if not user:
+        #     raise tornado.web.HTTPError(status_code=403)
         if self.application.get_jwt(data['id']) == self.get_cookie('jwt'):
             self.application.del_jwt(data['id'])
             self.write("OK")
