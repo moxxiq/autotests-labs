@@ -18,6 +18,8 @@ header {
 	background: #50437f;
 	animation: header 1.5s ease forwards;
 	color: #f4f9fb;
+    font-family: sans;
+    font-weight: lighter;
 }
 @keyframes header {
     from {
@@ -28,6 +30,21 @@ header {
         transform: translate(0, 0);
         opacity: 1;
     }
+}
+
+input {
+    width: 60%;
+    margin-top: 0.5em;
+    border-radius: 3px;
+  	border: 3px solid transparent;
+  	background: #bfb8d6;
+  	padding: 0.5em 0 0.5em 0.5em;
+  	font-size: 16px;
+  	color: #50437f;
+}
+
+input:focus {
+    border-bottom: 3px solid #50437f;
 }
 
 header button {
@@ -43,7 +60,7 @@ header button {
     transition: all 0.2s;
 }
 header button:hover {
-	cursor: pointer;
+    cursor: pointer;
     background: #7668af;
     color: #f4f9fb;
 }
@@ -53,6 +70,31 @@ header button:hover {
 }
 #signup-section button {
 	margin-left: 0.5em;
+	font-size: 0.8em;
+	width: auto;
+}
+#signup-section > div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+	height: 100%;
+}
+#signup-section > div > input {
+	width: auto;
+	display: inline-flex;
+	justify-content: flex-end;
+	align-items: center;
+  	padding: 0.2em 0 0.2em 0.2em;
+	margin: 0;
+	margin-left: 0.2em;
+	margin-right: 0.4em;
+	height: 90%;
+  	font-size: 0.8em;
+}
+
+#signup-section > div > label {
+    margin: 0.5em;
 }
 
 #content {
@@ -113,21 +155,6 @@ h3 {
 	width: 100%;
 	justify-content: center;
 	align-items: center;
-}
-
-input {
-    width: 60%;
-    margin-top: 0.5em;
-    border-radius: 3px;
-  	border: 3px solid transparent;
-  	background: #bfb8d6;
-  	padding: 0.5em 0 0.5em 0.5em;
-  	color: #50437f;
-  	font-size: 16px;
-}
-
-input:focus {
-    border-bottom: 3px solid #50437f;
 }
 
 #question button {

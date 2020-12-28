@@ -30,16 +30,14 @@ Vue.component('login-panel', {
   <div id="signup-section" align="right">
       <div v-if="isAuthorized">{{ this.$session.get('display_name') }}<button v-on:click="logOut">Log Out</button></div>
       <div v-else>
-        <span>
-          <label for="name"><b>Display Name</b></label>
-          <input type="text" placeholder="Enter Display name" name="display_name" v-model="display_name" required>
-          
-          <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" v-model="email" required>
-          
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" v-model="password" required>
-        </span>
+        <label for="name"><b>Display Name</b></label>
+        <input type="text" placeholder="Enter Display name" name="display_name" v-model="display_name" required>
+        
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" v-model="email" required>
+        
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" v-model="password" required>
         <button v-on:click="signUp">Sign Up</button><button v-on:click="logIn">Log In</button>
       </div>
   </div>
