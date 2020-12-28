@@ -100,7 +100,7 @@ Vue.component('login-panel', {
 
 Vue.component('task', {
   props: ['isAuthorized'],
-  template: `<div v-if="isAuthorized"><h2>Введіть список значень (лише дійсті числа)</h2>
+  template: `<div id="bleh_bleh" v-if="isAuthorized"><h2>Введіть список значень (лише дійсті числа)</h2>
     <div id="values">
       <input name="baseinput" type="text" v-on:input="baseInput"/>
     </div>

@@ -1,0 +1,161 @@
+body {
+	width: 100%;
+	margin: 0;
+}
+
+#app {
+	width: 100%;
+	height: 100%;
+}
+
+header {
+	width: 100%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-end;
+	align-items: center;
+	height: 50px;
+	background: #50437f;
+	animation: header 1.5s ease forwards;
+	color: #f4f9fb;
+}
+@keyframes header {
+    from {
+        transform: translate(0, -100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+header button {
+    align-self: center;
+    background: #f4f9fb;
+    color: #50437f;
+    border: 2px solid #f4f9fb;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border-radius: 3px;
+    font-size: 1em;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+}
+header button:hover {
+	cursor: pointer;
+    background: #7668af;
+    color: #f4f9fb;
+}
+
+#signup-section {
+	margin: 0.5em;
+}
+#signup-section button {
+	margin-left: 0.5em;
+}
+
+#content {
+	color: #231c3b;
+	width: 100%;
+	margin 0;
+	padding: 0;
+	display: inline-flex;
+	justify-content: center;
+	margin-top: 2em;
+}
+
+#mainbar {
+	width: 60%;
+	border-radius: 1em;
+	border: 1px solid #50437f;
+	padding: 1em;
+	box-shadow: 0 10px 12px -4px grey;
+	margin-bottom: 2em;
+}
+
+#question {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+h1 {
+	font-size: 1.5em;
+	width: 100%;
+	text-align: center;
+}
+
+h2 {
+	font-size: 1.1em;
+	width: 100%;
+	text-align: left;
+	font-weight: normal;
+}
+
+h3 {
+	font-size: 1em;
+	width: 100%;
+	text-align: left;
+	font-weight: normal;
+}
+
+#bleh_bleh {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#values {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+input {
+    width: 60%;
+    margin-top: 0.5em;
+    border-radius: 3px;
+  	border: 3px solid transparent;
+  	background: #bfb8d6;
+  	padding: 0.5em 0 0.5em 0.5em;
+  	color: #50437f;
+  	font-size: 16px;
+}
+
+input:focus {
+    border-bottom: 3px solid #50437f;
+}
+
+#question button {
+    align-self: center;
+    margin-top: 1em;
+    background: #50437f;
+    color: #f4f9fb;
+    border: none;
+    padding: 0.5em 1em 0.5em 1em;
+    width: calc(60% + 1em);
+    border-radius: 3px;
+    font-size: 1em;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+}
+#question button:hover {
+	cursor: pointer;
+    background: #7668af;
+}
+
+#comments {
+	font-size: 1em;
+}
+
+#comments > ul > li > span > button {
+	width: auto;
+	margin: 0;
+	padding: 0.2em 0.5em 0.2em 0.5em;
+	font-size: 0.9em;
+}
