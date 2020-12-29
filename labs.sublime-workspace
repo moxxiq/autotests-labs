@@ -439,6 +439,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Course work/source/test_3.py",
+			"settings":
+			{
+				"buffer_size": 13803,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"build_system_choices":
@@ -717,7 +726,7 @@
 	],
 	"find":
 	{
-		"height": 64.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -983,8 +992,39 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Course work/source/test_3.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13803,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9202,
+								9202
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 69.0,
+						"translation.y": 5360.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -1021,7 +1061,7 @@
 		"cols":
 		[
 			0.0,
-			0.493943064809,
+			0.513930950939,
 			1.0
 		],
 		"rows":

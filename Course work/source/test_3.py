@@ -236,6 +236,9 @@ class AppTest(unittest.TestCase):
             self._post_comment(driver, numbers)
             self._check_answer(driver, "47")
             self._check_last_comment(driver, my_comment, name)
+            # bad input
+            self._post_comment(driver, [99, 'numbers', '', ''])
+            self._check_answer(driver, "")
 
     def test_6_comment(self):
         """
