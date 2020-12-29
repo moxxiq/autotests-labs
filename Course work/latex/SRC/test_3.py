@@ -17,7 +17,7 @@ class AppTest(unittest.TestCase):
         self.maxDiff = None
 
     def tearDown(self):
-        # Despite of it's already in __exit__, memory won't free ВЇ\_(гѓ„)_/ВЇ idk
+        # Despite of it's already in __exit__, memory won't free idk
         self.driver.quit()
         self.backend_process.kill()
         self.backend_process.wait()
@@ -58,7 +58,7 @@ class AppTest(unittest.TestCase):
             elem = driver.find_element(By.CSS_SELECTOR, f"input:nth-child({i + 1})")
             elem.clear()
             elem.send_keys(str(n))
-        solve = driver.find_element(By.XPATH, '//button[.="РћР±С‡РёСЃР»РёС‚Рё"]')
+        solve = driver.find_element(By.XPATH, '//button[.="Обчислити"]')
         solve.click()
 
     def _check_answer(self, driver, answer):
@@ -75,12 +75,12 @@ class AppTest(unittest.TestCase):
 
     def test_1_anonymous(self):
         """
-        1. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ Р°РЅРѕРЅС–РјРЅРёР№ РєРѕСЂРёСЃС‚СѓРІР°С‡ Р±Р°С‡РёС‚СЊ РЅР° СЃС‚РѕСЂС–РЅС†С–
+        1. Перевіряє, що анонімний користувач бачить на сторінці
         """
         with self.driver as driver:
             driver.get(self.START_URL)
             elems = driver.find_elements(
-                By.XPATH, '//h1[.="РљСѓСЂСЃРѕРІР° СЂРѕР±РѕС‚Р°"]')
+                By.XPATH, '//h1[.="Курсова робота"]')
             self.assertTrue(elems, 'Header is absent')
 
             elems = driver.find_elements(
@@ -136,7 +136,7 @@ class AppTest(unittest.TestCase):
 
     def test_2_signup(self):
         """
-        2. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РЅРѕРІРёР№ РєРѕСЂРёСЃС‚СѓРІР°С‡ РјРѕР¶Рµ Р·Р°СЂРµС”СЃС‚СЂСѓРІР°С‚РёСЃСЊ
+        2. Перевіряє, що новий користувач може зареєструватись
         """
         display_name = 'Carol C.'
         email = 'carol@gmail.com'
@@ -182,7 +182,7 @@ class AppTest(unittest.TestCase):
 
     def test_3_log_in(self):
         """
-        3. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ Р·Р°СЂРµС”СЃС‚СЂРѕРІР°РЅРёР№ РєРѕСЂРёСЃС‚СѓРІР°С‡ РІС…РѕРґРёС‚СЊ РґРѕ СЃРІРѕРіРѕ РѕР±Р»С–РєРѕРІРѕРіРѕ Р·Р°РїРёСЃСѓ
+        3. Перевіряє, що зареєстрований користувач входить до свого облікового запису
         """
         email, password = 'torvalds@osdl.org', 'kernel'
 
@@ -209,7 +209,7 @@ class AppTest(unittest.TestCase):
 
     def test_4_editor(self):
         """
-        4. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РЅР° СЃС‚РѕСЂС–РЅС†С– С” РІРІС–Рґ Р·Р°РІРґР°РЅСЊ С‚Р° РєРЅРѕРїРєР° РћР±С‡РёСЃР»РёС‚Рё
+        4. Перевіряє, що на сторінці є ввід завдань та кнопка Обчислити
         """
         email, password = 'torvalds@osdl.org', 'kernel'
         with self.driver as driver:
@@ -218,12 +218,12 @@ class AppTest(unittest.TestCase):
 
             elem = driver.find_element(By.XPATH, "//div[@id='values']/input")
             self.assertTrue(elem, 'Input values is absent')
-            elem = driver.find_element(By.XPATH, '//button[.="РћР±С‡РёСЃР»РёС‚Рё"]')
-            self.assertTrue(elem, 'РћР±С‡РёСЃР»РёС‚Рё button is missing')
+            elem = driver.find_element(By.XPATH, '//button[.="Обчислити"]')
+            self.assertTrue(elem, 'New comment button is missing')
 
     def test_5_comment(self):
         """
-        5. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РєРѕСЂРёСЃС‚СѓРІР°С‡, РјРѕР¶Рµ РІРёРєРѕРЅР°С‚Рё Р·Р°РІРґР°РЅРЅСЏ
+        5. Перевіряє, що користувач, може виконати завдання
         """
         name = 'Linus T.'
         email, password = 'torvalds@osdl.org', 'kernel'
@@ -242,7 +242,7 @@ class AppTest(unittest.TestCase):
 
     def test_6_comment(self):
         """
-        6. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РєРѕСЂРёСЃС‚СѓРІР°С‡, РјРѕР¶Рµ РІРІРµСЃС‚Рё С‰Рµ РѕРґРёРЅ РєРѕРјРµРЅС‚Р°СЂ
+        6. Перевіряє, що користувач, може ввести ще один коментар
         """
         name = 'Linus T.'
         email, password = 'torvalds@osdl.org', 'kernel'
@@ -269,7 +269,7 @@ class AppTest(unittest.TestCase):
 
     def test_7_remove(self):
         """
-        7. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РєРѕСЂРёСЃС‚СѓРІР°С‡ РјРѕР¶Рµ РІРёРґР°Р»РёС‚Рё СЃС‚РІРѕСЂРµРЅРёР№ РЅРёРј РєРѕРјРµРЅС‚Р°СЂ
+        7. Перевіряє, що користувач може видалити створений ним коментар
         """
         name = 'Mary Jane'
         email, password = 'maryjane420@hh.org', 'canintoabyss'
@@ -290,11 +290,11 @@ class AppTest(unittest.TestCase):
             c1 = list(map(lambda x: x.text, comments_before))
             c2 = list(map(lambda x: x.text, comments_after))
 
-            self.assertEqual(c1, c2, "РљРѕРјРµРЅС‚Р°СЂС– 'РґРѕ' С– 'РїС–СЃР»СЏ' РІС–РґСЂС–Р·РЅСЏСЋС‚СЊСЃСЏ")
+            self.assertEqual(c1, c2, "Коментарі 'до' і 'після' відрізняються")
 
     def test_8_multiplayer(self):
         """
-        РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РјРѕР¶СѓС‚СЊ Р±СѓС‚Рё Р°РєС‚РёРІРЅРёРјРё РґРІР° СЂС–Р·РЅРёС… РєРѕСЂРёСЃС‚СѓРІР°С‡Р°
+        Перевіряє, що можуть бути активними два різних користувача
         """
         user_1 = ('User 1', 'u1@gmail.com', 'userone')
         user_2 = ('User 2', 'u2@gmail.com', 'usertwo')
@@ -326,7 +326,7 @@ class AppTest(unittest.TestCase):
                 '//div[@id="comments"]/ul/li/span[1]')
             c1 = list(map(lambda x: x.text, comments_user_1))
             c2 = list(map(lambda x: x.text, comments_user_2))
-            self.assertEqual(c1, c2, "РљРѕРјРµРЅС‚Р°СЂС– РІ РґРІРѕС… РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ РІС–РґРѕР±СЂР°Р¶Р°СЋС‚СЊСЃСЏ РїРѕ-СЂС–Р·РЅРѕРјСѓ")
+            self.assertEqual(c1, c2, "Коментарі в двох користувачів відображаються по-різному")
         with webdriver.Firefox() as driver:
             driver.get(self.START_URL)
             comments_after = driver.find_elements(

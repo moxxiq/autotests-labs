@@ -440,10 +440,19 @@
 	"buffers":
 	[
 		{
+			"file": "Course work/source/test_2.py",
+			"settings":
+			{
+				"buffer_size": 5518,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "Course work/source/test_3.py",
 			"settings":
 			{
-				"buffer_size": 13803,
+				"buffer_size": 13801,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -589,21 +598,24 @@
 	[
 		"/home/moxxiq/KPI/Automatic testing/Labs",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work",
-		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source",
-		"/home/moxxiq/KPI/Automatic testing/Labs/№4",
-		"/home/moxxiq/KPI/Automatic testing/Labs/№4/source"
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source"
 	],
 	"file_history":
 	[
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/latex/SRC/test_3.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/latex/SRC/test_2.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/latex/SRC/test_1.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test_2.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/backend.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test_3.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№4/latex/SRC/test.py",
+		"/home/moxxiq/Downloads/CP1251_charset_version_of-test.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№4/source/test.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№4/source/backend.py",
-		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/backend.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/index.html",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/css/style.css",
-		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test_3.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/js/index.js",
 		"/home/moxxiq/Desktop/test_2222.py",
-		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test_2.py",
 		"/home/moxxiq/KPI/Automatic testing/testapp_http.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task_2_acceptance_test.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test_1.py",
@@ -717,16 +729,11 @@
 		"/home/moxxiq/asynciotest.py",
 		"/home/moxxiq/KPI/python/test/main.py",
 		"/home/moxxiq/KPI/python/test/module/m.py",
-		"/home/moxxiq/KPI/python/test/module/n.py",
-		"/home/moxxiq/KPI/python/lewis-bots/config.py",
-		"/home/moxxiq/KPI/python/lewis-bots/TgBot/data/config.py",
-		"/home/moxxiq/KPI/python/gmbot/config example.py",
-		"/home/moxxiq/KPI/python/gmbot/TRASH/read_test.py",
-		"/home/moxxiq/KPI/python/lewis-bots/TgBot/loader.py"
+		"/home/moxxiq/KPI/python/test/module/n.py"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 64.0
 	},
 	"find_in_files":
 	{
@@ -740,6 +747,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"¯\\_(ツ)_/¯",
+			"clear",
+			"cleat",
+			"^\\d+\\.",
 			"screen",
 			"^\\w.",
 			"^\\w\\.",
@@ -863,16 +874,12 @@
 			"initSess",
 			"login",
 			"session",
-			"jwt",
-			"token",
-			"users_by_email",
-			"session",
 			"jwt"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"\\\\item ",
@@ -992,24 +999,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Course work/source/test_3.py",
+					"file": "Course work/source/test_2.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13803,
+						"buffer_size": 5518,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9202,
-								9202
+								2487,
+								2487
 							]
 						],
 						"settings":
@@ -1018,18 +1025,43 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 69.0,
-						"translation.y": 5360.0,
+						"translation.x": 0.0,
+						"translation.y": 3595.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Course work/source/test_3.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13801,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13092,
+								13092
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7920.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
@@ -1050,18 +1082,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.513930950939,
 			1.0
 		],
 		"rows":
@@ -1070,7 +1095,7 @@
 			1.0
 		]
 	},
-	"menu_visible": false,
+	"menu_visible": true,
 	"output.exec":
 	{
 		"height": 205.0

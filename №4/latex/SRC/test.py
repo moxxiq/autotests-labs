@@ -10,14 +10,13 @@ class AppTest(unittest.TestCase):
     BACKEND_NAME = 'backend.py'
     START_URL = 'http://localhost:8000'
     LOGOUT_SIGNATURE = 'Log Out'
-    header_pause = 2
+
     def setUp(self):
         self.backend_process = Popen(['python', self.BACKEND_NAME])
         self.driver = webdriver.Firefox()
-        self.maxDiff = None
 
     def tearDown(self):
-        # Despite of it's already in __exit__, memory won't free ВЇ\_(гѓ„)_/ВЇ idk
+        # Despite of it's already in __exit__, memory won't free idk
         self.driver.quit()
         self.backend_process.kill()
         self.backend_process.wait()
@@ -52,19 +51,10 @@ class AppTest(unittest.TestCase):
         btn = driver.find_element(By.XPATH, '//button[.="Log Out"]')
         btn.click()
 
-    def _post_comment(self, driver, numbers):
-        # driver.find_element(By.XPATH, '//button[.="New comment"]').click()
-        for i, n in enumerate(numbers):
-            elem = driver.find_element(By.CSS_SELECTOR, f"input:nth-child({i + 1})")
-            elem.clear()
-            elem.send_keys(str(n))
-        solve = driver.find_element(By.XPATH, '//button[.="РћР±С‡РёСЃР»РёС‚Рё"]')
-        solve.click()
-
-    def _check_answer(self, driver, answer):
-        elem_answer = driver.find_element(By.CSS_SELECTOR, "h3")
-        answer_in_elem = elem_answer.text[11:]
-        self.assertEqual(answer_in_elem, answer, "Answer isn't correct")
+    def _post_comment(self, driver, text_comment):
+        driver.find_element(By.CLASS_NAME, 'ql-editor').clear()
+        driver.find_element(By.CLASS_NAME, 'ql-editor').send_keys(text_comment)
+        driver.find_element(By.XPATH, '//button[.="New comment"]').click()
 
     def _check_last_comment(self, driver, comment, author):
         xp = f'//div[@id="comments"]/ul/li[last()][span="{comment}"]'\
@@ -75,21 +65,24 @@ class AppTest(unittest.TestCase):
 
     def test_1_anonymous(self):
         """
-        1. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ Р°РЅРѕРЅС–РјРЅРёР№ РєРѕСЂРёСЃС‚СѓРІР°С‡ Р±Р°С‡РёС‚СЊ РЅР° СЃС‚РѕСЂС–РЅС†С–
+        1. Перевіряє, що анонімний користувач бачить на сторінці
         """
         with self.driver as driver:
             driver.get(self.START_URL)
+            # a
             elems = driver.find_elements(
-                By.XPATH, '//h1[.="РљСѓСЂСЃРѕРІР° СЂРѕР±РѕС‚Р°"]')
-            self.assertTrue(elems, 'Header is absent')
+                By.XPATH, '//h1[.="Is this a good way to process input?"]')
+            self.assertTrue(elems, 'Question header is absent')
 
+            # b
             elems = driver.find_elements(
-                By.XPATH, '//h2[text()!=""]')
-            self.assertTrue(elems, 'Condition body is empty')
+                By.XPATH, '//div[@id="question"]/pre[text()!=""]')
+            self.assertTrue(elems, 'Question body is empty')
 
+            # c
             comments = (
-                ('Input: [2, 4, 16, 256] Answer: 128.2692480682724', 'Linus T.'),
-                ('Input: [1, -1, 4, -4] Answer: 2.9154759474226504', 'Iryna K.'),
+                ('Test comment 1', 'Alice A.'),
+                ('Test comment 2', 'Bob B.'),
             )
 
             for comment, elem in zip(
@@ -99,44 +92,47 @@ class AppTest(unittest.TestCase):
                 comment_text = elem.find_element(By.TAG_NAME, 'span').text
                 author = elem.find_element(By.TAG_NAME, 'a').text
                 self.assertEqual(comment, (comment_text, author),
-                                 'Answers does not match')
+                                 'Comment does not match')
 
+            # d
             elems = driver.find_elements(By.XPATH, '//button[.="Sign Up"]')
             self.assertTrue(elems, 'Sign up button is missing')
 
             elems = driver.find_elements(By.XPATH, '//button[.="Log In"]')
             self.assertTrue(elems, 'Log In button is missing')
+
+            # e
             # Display Name
             elems = driver.find_elements(
-                By.XPATH, '//input[@name="display_name"]')
+                By.XPATH, '//div[input[@name="display_name"]]')
             self.assertTrue(
                 elems, 'There is no field for entering a Display name')
             elems = driver.find_elements(
-                By.XPATH, '//div[@id="signup-section"]/div/label[1]/b')
+                By.XPATH, '//div[label[@for="name"]/b]')
             self.assertTrue(
                 elems, 'There is no label for a Display name')
             # Email
             elems = driver.find_elements(
-                By.XPATH, '//input[@name="email"]')
+                By.XPATH, '//div[input[@name="email"]]')
             self.assertTrue(
                 elems, 'There is no field for entering an Email')
             elems = driver.find_elements(
-                By.XPATH, '//div[@id="signup-section"]/div/label[2]/b')
+                By.XPATH, '//div[label[@for="email"]/b]')
             self.assertTrue(
                 elems, 'There is no label for an Email')
             # Password
             elems = driver.find_elements(
-                By.XPATH, '//input[@name="password"]')
+                By.XPATH, '//div[input[@name="password"]]')
             self.assertTrue(
                 elems, 'There is no field for entering a Password')
             elems = driver.find_elements(
-                By.XPATH, '//div[@id="signup-section"]/div/label[3]/b')
+                By.XPATH, '//div[label[@for="psw"]/b]')
             self.assertTrue(
                 elems, 'There is no label for a Password')
 
     def test_2_signup(self):
         """
-        2. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РЅРѕРІРёР№ РєРѕСЂРёСЃС‚СѓРІР°С‡ РјРѕР¶Рµ Р·Р°СЂРµС”СЃС‚СЂСѓРІР°С‚РёСЃСЊ
+        2. Перевіряє, що новий користувач може зареєструватись
         """
         display_name = 'Carol C.'
         email = 'carol@gmail.com'
@@ -144,16 +140,17 @@ class AppTest(unittest.TestCase):
 
         with self.driver as driver:
             driver.get(self.START_URL)
+            # a
             # signing up
             driver.find_element(
                 By.NAME, 'display_name').send_keys(display_name)
             driver.find_element(By.NAME, 'email').send_keys(email)
             driver.find_element(By.NAME, 'password').send_keys(password)
-            driver.find_element(By.XPATH, "//div[@id='signup-section']/div/button").click()
+            driver.find_element(By.XPATH, '//button[.="Sign Up"]').click()
             # Name check
             raw_text = driver.find_element(By.ID, 'signup-section').text
             self.assertEqual(
-                raw_text[:-len(self.LOGOUT_SIGNATURE)-1], display_name)
+                raw_text[:-len(self.LOGOUT_SIGNATURE)], display_name)
             # Log out usage check
             btn = driver.find_element(By.XPATH, '//button[.="Log Out"]')
             # b
@@ -182,9 +179,9 @@ class AppTest(unittest.TestCase):
 
     def test_3_log_in(self):
         """
-        3. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ Р·Р°СЂРµС”СЃС‚СЂРѕРІР°РЅРёР№ РєРѕСЂРёСЃС‚СѓРІР°С‡ РІС…РѕРґРёС‚СЊ РґРѕ СЃРІРѕРіРѕ РѕР±Р»С–РєРѕРІРѕРіРѕ Р·Р°РїРёСЃСѓ
+        3. Перевіряє, що зареєстрований користувач входить до свого облікового запису
         """
-        email, password = 'torvalds@osdl.org', 'kernel'
+        email, password = 'alice_2002@gmail.com', 'aaa'
 
         with self.driver as driver:
             driver.get(self.START_URL)
@@ -194,7 +191,7 @@ class AppTest(unittest.TestCase):
                 By.XPATH, '//button[.="Log Out"]'))
             raw_text = driver.find_element(By.ID, 'signup-section').text
             self.assertEqual(
-                raw_text[:-len(self.LOGOUT_SIGNATURE)-1], 'Linus T.')
+                raw_text[:-len(self.LOGOUT_SIGNATURE)], 'Alice A.')
             driver.find_element(By.XPATH, '//button[.="Log Out"]').click()
 
             self._log_in(driver, email, 'wrong-password')
@@ -209,55 +206,87 @@ class AppTest(unittest.TestCase):
 
     def test_4_editor(self):
         """
-        4. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РЅР° СЃС‚РѕСЂС–РЅС†С– С” РІРІС–Рґ Р·Р°РІРґР°РЅСЊ С‚Р° РєРЅРѕРїРєР° РћР±С‡РёСЃР»РёС‚Рё
+        4. Перевіряє, що на сторінці є Редактор та кнопка New comment
         """
-        email, password = 'torvalds@osdl.org', 'kernel'
+        email, password = 'alice_2002@gmail.com', 'aaa'
+        my_script = """
+        var elem = document.getElementById('editor-section');
+        elem.style.borderColor = "red";
+        elem.style.borderStyle = "solid";
+        """
         with self.driver as driver:
             driver.get(self.START_URL)
             self._log_in(driver, email, password)
 
-            elem = driver.find_element(By.XPATH, "//div[@id='values']/input")
-            self.assertTrue(elem, 'Input values is absent')
-            elem = driver.find_element(By.XPATH, '//button[.="РћР±С‡РёСЃР»РёС‚Рё"]')
-            self.assertTrue(elem, 'РћР±С‡РёСЃР»РёС‚Рё button is missing')
+            elem = driver.find_element(By.ID, 'editor-section')
+            self.assertTrue(elem, 'Editor section is not present')
+            elem = driver.find_element(By.XPATH, '//button[.="New comment"]')
+            self.assertTrue(elem, 'New comment button is missing')
+
+            driver.execute_script(my_script)
+            driver.save_screenshot('comments_screenshot.png')
+            time.sleep(2)
 
     def test_5_comment(self):
         """
-        5. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РєРѕСЂРёСЃС‚СѓРІР°С‡, РјРѕР¶Рµ РІРёРєРѕРЅР°С‚Рё Р·Р°РІРґР°РЅРЅСЏ
+        5. Перевіряє, що користувач, може ввести новий коментар
         """
-        name = 'Linus T.'
-        email, password = 'torvalds@osdl.org', 'kernel'
-        numbers = [3, 13, 33, 87]
-        my_comment = "Input: [3, 13, 33, 87] Answer: 47.0"
+        def click_style(style_name):
+            driver.find_element(By.CLASS_NAME, 'ql-' + style_name).click()
+
+        name = "Alice A."
+        email, password = 'alice_2002@gmail.com', 'aaa'
+        my_comment = 'Comment from Alice'
+        expected_formatted_comment_html = '<span><strong>Comment</strong> '\
+            '<em>from <s>Alice</s></em> <u>Dmytro</u></span>'
+
         with self.driver as driver:
             driver.get(self.START_URL)
             self._log_in(driver, email, password)
             # a
-            self._post_comment(driver, numbers)
-            self._check_answer(driver, "47")
+            self._post_comment(driver, my_comment)
             self._check_last_comment(driver, my_comment, name)
-            # bad input
-            self._post_comment(driver, [99, 'numbers', '', ''])
-            self._check_answer(driver, "")
+            # b
+            text_field = driver.find_element(By.CLASS_NAME, 'ql-editor')
+            text_field.clear()
+            click_style('bold')
+            text_field.send_keys('Comment')
+            click_style('bold')
+            text_field.send_keys(' ')
+            click_style('italic')
+            text_field.send_keys('from ')
+            click_style('strike')
+            text_field.send_keys('Alice')
+            click_style('strike')
+            click_style('italic')
+            text_field.send_keys(' ')
+            click_style('underline')
+            text_field.send_keys('Dmytro')
+            click_style('underline')
+            driver.find_element(By.XPATH, '//button[.="New comment"]').click()
+
+            elem = driver.find_element(
+                By.XPATH, '//div[@id="comments"]/ul/li[last()]/span')
+            extracted_html = elem.get_attribute('outerHTML')
+            self.assertEqual(extracted_html, expected_formatted_comment_html)
+            # c
+            self._check_last_comment(driver, "Comment from Alice Dmytro", name)
 
     def test_6_comment(self):
         """
-        6. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РєРѕСЂРёСЃС‚СѓРІР°С‡, РјРѕР¶Рµ РІРІРµСЃС‚Рё С‰Рµ РѕРґРёРЅ РєРѕРјРµРЅС‚Р°СЂ
+        6. Перевіряє, що користувач, може ввести ще один коментар
         """
-        name = 'Linus T.'
-        email, password = 'torvalds@osdl.org', 'kernel'
-        numbers_1 = (3, 13, 33, 87)
-        numbers_2 = (-16, 16, -16, 16)
-        comment_numbers = (numbers_1, numbers_2)
-        comments = (
-            "Input: [3, 13, 33, 87] Answer: 47.0",
-            "Input: [-16, 16, -16, 16] Answer: 16.0",
-        )
+        name = "Alice A."
+        email, password = 'alice_2002@gmail.com', 'aaa'
+        comments = ('Previous Alice comment', 'Current Alice comment')
         with self.driver as driver:
             driver.get(self.START_URL)
             self._log_in(driver, email, password)
-            for numbers in comment_numbers:
-                self._post_comment(driver, numbers)
+            # a
+            for comment in comments:
+                self._post_comment(driver, comment)
+                self._check_last_comment(driver, comment, name)
+            # b
             for comment, elem in zip(
                 comments,
                 driver.find_elements(By.XPATH, '//div[@id="comments"]/ul/li[position() > (last() - 2)]')
@@ -269,32 +298,26 @@ class AppTest(unittest.TestCase):
 
     def test_7_remove(self):
         """
-        7. РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РєРѕСЂРёСЃС‚СѓРІР°С‡ РјРѕР¶Рµ РІРёРґР°Р»РёС‚Рё СЃС‚РІРѕСЂРµРЅРёР№ РЅРёРј РєРѕРјРµРЅС‚Р°СЂ
+        7. Перевіряє, що користувач може видалити створений ним коментар
         """
-        name = 'Mary Jane'
-        email, password = 'maryjane420@hh.org', 'canintoabyss'
+        email, password = 'alice_2002@gmail.com', 'aaa'
+        comment = 'Alice comment'
         with self.driver as driver:
             driver.get(self.START_URL)
-            self._create_user(driver, name, email, password)
             self._log_in(driver, email, password)
             comments_before = driver.find_elements(
                 By.XPATH,
-                '//div[@id="comments"]/ul/li/span[1]')
-            self._post_comment(driver, [11, 13, 15])
-            time.sleep(0.5)
+                '//div[@id="comments"]/ul/li')
+            self._post_comment(driver, comment)
             driver.find_element(By.XPATH, '//div[@id="comments"]/ul/li[last()]/span/button[.="Remove"]').click()
-            time.sleep(0.5)
             comments_after = driver.find_elements(
                 By.XPATH,
-                '//div[@id="comments"]/ul/li/span[1]')
-            c1 = list(map(lambda x: x.text, comments_before))
-            c2 = list(map(lambda x: x.text, comments_after))
-
-            self.assertEqual(c1, c2, "РљРѕРјРµРЅС‚Р°СЂС– 'РґРѕ' С– 'РїС–СЃР»СЏ' РІС–РґСЂС–Р·РЅСЏСЋС‚СЊСЃСЏ")
+                '//div[@id="comments"]/ul/li')
+            self.assertEqual(comments_before, comments_after)
 
     def test_8_multiplayer(self):
         """
-        РџРµСЂРµРІС–СЂСЏС”, С‰Рѕ РјРѕР¶СѓС‚СЊ Р±СѓС‚Рё Р°РєС‚РёРІРЅРёРјРё РґРІР° СЂС–Р·РЅРёС… РєРѕСЂРёСЃС‚СѓРІР°С‡Р°
+        Перевіряє, що можуть бути активними два різних користувача
         """
         user_1 = ('User 1', 'u1@gmail.com', 'userone')
         user_2 = ('User 2', 'u2@gmail.com', 'usertwo')
@@ -309,31 +332,64 @@ class AppTest(unittest.TestCase):
             driver_2.get(self.START_URL)
             # a
             self._log_in(driver_1, *user_1[1:])
-            self._post_comment(driver_1, [1, 2, 3])
+            self._post_comment(driver_1, 'comment1')
             # b
             self._log_in(driver_2, *user_2[1:])
-            self._post_comment(driver_2, [11, 22, 33])
-            # add and remove
-            self._post_comment(driver_1, [1, 2, 3])
-            driver_1.find_element(By.XPATH, '//div[@id="comments"]/ul/li[last()]/span/button[.="Remove"]').click()
+            self._post_comment(driver_2, 'comment2')
 
-            comments_user_2 = driver_2.find_elements(
+            comment_2 = driver_2.find_elements(
                 By.XPATH,
-                '//div[@id="comments"]/ul/li/span[1]')
-
-            comments_user_1 = driver_1.find_elements(
+                '//div[@id="comments"]/ul/li/span[.="comment2"]')
+            self.assertTrue(comment_2, 'Comment 2 is absent')
+            comment_1 = driver_2.find_elements(
                 By.XPATH,
-                '//div[@id="comments"]/ul/li/span[1]')
-            c1 = list(map(lambda x: x.text, comments_user_1))
-            c2 = list(map(lambda x: x.text, comments_user_2))
-            self.assertEqual(c1, c2, "РљРѕРјРµРЅС‚Р°СЂС– РІ РґРІРѕС… РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ РІС–РґРѕР±СЂР°Р¶Р°СЋС‚СЊСЃСЏ РїРѕ-СЂС–Р·РЅРѕРјСѓ")
+                '//div[@id="comments"]/ul/li/span[.="comment1"]')
+            self.assertTrue(comment_1, 'Comment 1 is absent')
+            # c
+            self._post_comment(driver_1, 'comment3')
+            self.assertTrue(
+                driver_1.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment1"]'),
+                'Comment 1 is absent')
+            self.assertTrue(
+                driver_1.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment2"]'),
+                'Comment 2 is absent')
+            self.assertTrue(
+                driver_1.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment3"]'),
+                'Comment 3 is absent')
+            # d
+            driver_2.find_element(
+                By.XPATH,
+                '//div[@id="comments"]/ul/li[span = "comment2"]/span/button[.="Remove"]'
+            ).click()
+            self.assertTrue(
+                driver_2.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment1"]'),
+                'Comment 1 is absent')
+            self.assertTrue(
+                driver_2.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li/span[.="comment3"]'),
+                'Comment 3 is absent')
+        # e
         with webdriver.Firefox() as driver:
             driver.get(self.START_URL)
-            comments_after = driver.find_elements(
-                By.XPATH,
-                '//div[@id="comments"]/ul/li/span')
-            c = list(map(lambda x: x.text, comments_after))
-        self.assertEqual(c1, c)
+            self.assertTrue(
+                driver.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li[span="comment1"]'),
+                'Comment 1 is absent')
+            self.assertTrue(
+                driver.find_elements(
+                    By.XPATH,
+                    '//div[@id="comments"]/ul/li[span="comment3"]'),
+                'Comment 3 is absent')
 
 
 if __name__ == '__main__':
