@@ -62,6 +62,8 @@
 % пакет для кодів програм
 \RequirePackage{verbatim}
 
+% пакет для закресленого тексту
+\RequirePackage{soul}
 
 % 4. Основна частина
 \frenchspacing
