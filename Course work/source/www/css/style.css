@@ -16,7 +16,7 @@ header {
 	align-items: center;
 	height: 50px;
 	background: #50437f;
-	animation: header 1.5s ease forwards;
+	animation: header ease forwards;
 	color: #f4f9fb;
     font-family: sans;
     font-weight: lighter;
