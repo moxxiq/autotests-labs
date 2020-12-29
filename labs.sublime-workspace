@@ -581,11 +581,13 @@
 		"/home/moxxiq/KPI/Automatic testing/Labs",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source",
-		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www",
-		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/js"
+		"/home/moxxiq/KPI/Automatic testing/Labs/№4",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№4/source"
 	],
 	"file_history":
 	[
+		"/home/moxxiq/KPI/Automatic testing/Labs/№4/source/test.py",
+		"/home/moxxiq/KPI/Automatic testing/Labs/№4/source/backend.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/backend.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/index.html",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/css/style.css",
@@ -596,7 +598,6 @@
 		"/home/moxxiq/KPI/Automatic testing/testapp_http.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/№2/source/task_2_acceptance_test.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test_1.py",
-		"/home/moxxiq/KPI/Automatic testing/Labs/№4/source/test.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test__2.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/www/js/vue.js",
@@ -712,8 +713,7 @@
 		"/home/moxxiq/KPI/python/lewis-bots/TgBot/data/config.py",
 		"/home/moxxiq/KPI/python/gmbot/config example.py",
 		"/home/moxxiq/KPI/python/gmbot/TRASH/read_test.py",
-		"/home/moxxiq/KPI/python/lewis-bots/TgBot/loader.py",
-		"/home/moxxiq/KPI/python/gmbot/TgBot/utils/get_me.py"
+		"/home/moxxiq/KPI/python/lewis-bots/TgBot/loader.py"
 	],
 	"find":
 	{
@@ -731,6 +731,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"screen",
+			"^\\w.",
+			"^\\w\\.",
+			"_",
+			"^\\w\\.",
+			"(^a\\.)",
+			"^a\\.",
+			"\\d\\.",
+			"2.",
+			"^\\d\\.",
+			"^\\w\\.",
+			"Remove",
+			"New comment",
+			"Log In",
+			"Log Out",
+			"Sign Up",
+			"\\d+\\.",
 			"remove",
 			"html",
 			"_post_comment",
@@ -841,31 +858,27 @@
 			"token",
 			"users_by_email",
 			"session",
-			"jwt",
-			"comment",
-			"console.log",
-			"test_users",
-			"test comment",
-			"comment_editor",
-			"newComment",
-			"quill-editor",
-			"-",
-			" - ",
-			"button",
-			"new comment",
-			"print",
-			"arr = list(filter(lambda x: x is not None, arr))",
-			"print",
-			"numbers",
-			"fetchComments",
-			"fetchComments("
+			"jwt"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"\\\\item ",
+			"\\\\begin{enumerate}\n\\1",
+			"\n\\\\end{enumerate}\n\\\\item ",
+			"\\\\end{enumerate}\n\\\\item ",
+			"\\end{enumerate}\n\\\\item ",
+			"\\\\item ",
+			"\\item ",
+			"\\textbf{Remove}",
+			"\\textbf{New comment}",
+			"\\textbf{Log In}",
+			"\\textbf{Log Out}",
+			"\\textbf{Sign Up}",
+			"\\\\item ",
 			"START_URL",
 			"with self.driver as driver",
 			"driver",
@@ -1064,7 +1077,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

@@ -225,6 +225,7 @@ class AppTest(unittest.TestCase):
 
             driver.execute_script(my_script)
             driver.save_screenshot('comments_screenshot.png')
+            time.sleep(2)
 
     def test_5_comment(self):
         """
