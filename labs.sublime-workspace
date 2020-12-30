@@ -439,6 +439,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Course work/source/test_2.py",
+			"settings":
+			{
+				"buffer_size": 5518,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"build_system_choices":
@@ -584,6 +593,9 @@
 	],
 	"file_history":
 	[
+		"/home/moxxiq/KPI/python/AT-demo/backend.py",
+		"/home/moxxiq/KPI/python/lewis-bots/config.py",
+		"/home/moxxiq/KPI/python/lewis-bots/main.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/wsgi/backend.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/backend.py",
 		"/home/moxxiq/KPI/Automatic testing/Labs/Course work/source/test_3.py",
@@ -664,7 +676,6 @@
 		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/users/last.py",
 		"/home/moxxiq/KPI/python/gmbot/TgBot/handlers/users/add.py",
 		"/home/moxxiq/KPI/python/gmbot/main.py",
-		"/home/moxxiq/KPI/python/lewis-bots/main.py",
 		"/home/moxxiq/KPI/python/gmbot/GM/gmpart.py",
 		"/home/moxxiq/KPI/python/lewis-bots/GM/gmpart.py",
 		"/home/moxxiq/KPI/python/gmbot/DB/PostgreSQL.py",
@@ -709,13 +720,11 @@
 		"/home/moxxiq/KPI/python/gmbot/TgBot/data/config.py",
 		"/home/moxxiq/KPI/python/lewis-bots/DB/PostgreSQL.py",
 		"/home/moxxiq/KPI/python/lewis-bots/TgBot/handlers/users/add.py",
-		"/home/moxxiq/asynciotest.py",
-		"/home/moxxiq/KPI/python/test/main.py",
-		"/home/moxxiq/KPI/python/test/module/m.py"
+		"/home/moxxiq/asynciotest.py"
 	],
 	"find":
 	{
-		"height": 64.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -729,6 +738,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ADDRESS",
+			"WEBAPP_HOST",
 			"tornado.escape",
 			"¯\\_(ツ)_/¯",
 			"clear",
@@ -854,9 +865,7 @@
 			"session",
 			"print",
 			"task",
-			"initSess",
-			"login",
-			"session"
+			"initSess"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -981,8 +990,39 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Course work/source/test_2.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 5518,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1016,7 +1056,7 @@
 			1.0
 		]
 	},
-	"menu_visible": true,
+	"menu_visible": false,
 	"output.exec":
 	{
 		"height": 205.0
